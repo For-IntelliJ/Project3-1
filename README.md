@@ -25,7 +25,7 @@ yarn start
 🎨 Tailwind CSS 관련 안내
 이 프로젝트는 Tailwind CSS v3를 사용합니다.
 
-✅ 보통은 yarn install만 해도 Tailwind가 자동 설치됩니다.
+✅ 보통은 yarn install만 해도 Tailwind가 자동 설치됩니다.<br>
 ❗ 혹시 Tailwind 관련 에러가 난다면, 아래 명령어를 실행해 주세요:
 ```bash
 yarn add -D tailwindcss@3 postcss autoprefixer
