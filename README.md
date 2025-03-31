@@ -1,8 +1,8 @@
 # Project3-1
+---
 신구대학교 3학년 C반 프로젝트 구현 첫번째 프로젝트/멘토멘티 웹사이트 제작 <br>
 프론트: Create React App(CRA) 기반으로 React와 Tailwind CSS v3을 사용해 구성<br>패키지 관리는 Yarn을 사용합니다.
 백엔드: Spring Boot, 통합개발환경: IntelliJ를 사용합니다.
-<br> push test
 ---
 
 ## 🚀 시작 방법 (로컬 실행)
