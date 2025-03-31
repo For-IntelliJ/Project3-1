@@ -18,6 +18,12 @@ cd Project3-1
 yarn install
 ```
 3. 개발 서버 실행
+- 1. 백엔드
+```bash
+./gradlew build
+```
+
+- 2. 프론트
 ```bash
 yarn start
 ```
