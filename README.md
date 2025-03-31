@@ -22,7 +22,7 @@ yarn install
 ```bash
 ./gradlew build
 ```
-추후 화면 오른쪽 Gradle 탭에서 bootRun하면 돼요.
+추후 화면 오른쪽 Gradle 탭에서 **bootRun**하면 돼요.
 
 - 2. 프론트
 ```bash
