@@ -14,12 +14,12 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner run(UserRepository userRepository) {
-		return args -> {
-			User user = new User("kang", "kang@email.com");
-			userRepository.save(user);
-			System.out.println("✅ User 저장 완료!");
-		};
-	}
+//	@Bean
+//	public CommandLineRunner run(UserRepository userRepository) {
+//		return args -> {
+//			User user = new User("kang", "kang@email.com");
+//			userRepository.save(user);
+//			System.out.println("✅ User 저장 완료!");
+//		};
+//	}
 }

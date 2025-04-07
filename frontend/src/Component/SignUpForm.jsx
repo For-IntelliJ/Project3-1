@@ -1,52 +1,62 @@
-// SignUpForm.jsx
+// src/components/SignUpForm.js
 import React, { useState } from "react";
+import axios from "axios";
 
-const SignUpForm = () => {
+function SignUpForm() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault(); // 폼 새로고침 방지
 
-        // 스프링 서버로 리다이렉션 GET 요청
-        window.location.href = `http://localhost:8080/register?username=${encodeURIComponent(
-            username
-        )}&email=${encodeURIComponent(email)}`;
+        try {
+            await axios.get("http://localhost:8080/register", {
+                params: {
+                    username,
+                    email,
+                },
+            });
+
+            // 회원가입 성공 후 알림창 띄우기
+            alert("회원가입이 완료되었습니다!");
+
+            // 입력값 초기화
+            setUsername("");
+            setEmail("");
+        } catch (error) {
+            console.error("회원가입 실패:", error);
+            alert("회원가입 중 오류가 발생했습니다.");
+        }
     };
 
     return (
-        <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-2xl shadow-md">
-            <h2 className="text-2xl font-bold mb-4 text-center">회원가입</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                    <label className="block text-sm font-medium">이름</label>
-                    <input
-                        type="text"
-                        className="w-full mt-1 p-2 border border-gray-300 rounded-xl"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label className="block text-sm font-medium">이메일</label>
-                    <input
-                        type="email"
-                        className="w-full mt-1 p-2 border border-gray-300 rounded-xl"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <button
-                    type="submit"
-                    className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl"
-                >
-                    회원가입
-                </button>
-            </form>
-        </div>
+        <form onSubmit={handleSubmit} className="p-4 bg-white rounded shadow-md">
+            <h2 className="text-lg font-bold mb-4">회원가입</h2>
+
+            <input
+                type="text"
+                placeholder="이름"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="border p-2 mb-2 w-full"
+                required
+            />
+            <input
+                type="email"
+                placeholder="이메일"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="border p-2 mb-4 w-full"
+                required
+            />
+            <button
+                type="submit"
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            >
+                회원가입
+            </button>
+        </form>
     );
-};
+}
 
 export default SignUpForm;
