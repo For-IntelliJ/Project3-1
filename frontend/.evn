@@ -1,0 +1,7 @@
+# .env.development
+VITE_ENV=development
+VITE_S3_BASE_URL=
+
+# .env.production
+VITE_ENV=production
+VITE_S3_BASE_URL=https://your-bucket.s3.amazonaws.com
