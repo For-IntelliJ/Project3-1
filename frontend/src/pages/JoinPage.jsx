@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PasswordInput from '../components/PasswordInput'; // 경로는 파일 위치에 맞게 수정
 
 const JoinPage = () => {
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!isPasswordValid) {
+      alert('비밀번호를 다시 확인해주세요.');
+      return;
+      // 나중에 회원가입 보내는 어쩌고 넣기
+    }
+  };
+
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-[#EBEFFF]">
       <div className="flex h-full w-full max-w-[1200px] overflow-hidden rounded-xl bg-white">
@@ -21,7 +32,7 @@ const JoinPage = () => {
           {/*작성 폼*/}
           <div className="flex w-full flex-col items-center justify-center">
             <h2 className="mb-6 text-center text-2xl font-bold">회원가입</h2>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <p className="mb-1 text-font">이름</p>
               <input
                 type="text"
@@ -37,22 +48,19 @@ const JoinPage = () => {
               <p className="mb-1 text-font">Email</p>
               <input
                 type="text"
-                placeholder="Email"
+                placeholder="idda@idda.com"
                 className="p- w-full rounded border border-hover p-2 transition duration-200 hover:border-2 hover:border-hover focus:border-2 focus:border-hover focus:outline-none"
               />
-              <p className="mb-1 text-font">비밀번호</p>
+              <p className="mb-1 text-font">전화번호</p>
               <input
-                type="text"
-                placeholder="비밀번호"
-                className="p- w-full rounded border border-hover p-2 transition duration-200 hover:border-2 hover:border-hover focus:border-2 focus:border-hover focus:outline-none"
+                type="tel"
+                placeholder="010-1234-5678"
+                pattern="010-[0-9]{4}-[0-9]{4}"
+                inputMode="numeric"
+                maxLength={13}
+                className="w-full rounded border border-hover p-2 transition duration-200 hover:border-2 hover:border-hover focus:border-2 focus:border-hover focus:outline-none"
               />
-              <p className="mb-1 text-font">비밀번호 확인</p>
-              <input
-                type="text"
-                placeholder="비밀번호 확인"
-                className="p- w-full rounded border border-hover p-2 transition duration-200 hover:border-2 hover:border-hover focus:border-2 focus:border-hover focus:outline-none"
-              />
-
+              <PasswordInput onValid={setIsPasswordValid} />
               <button className="w-full rounded bg-[#405DF9] py-2 text-white">
                 회원가입
               </button>
