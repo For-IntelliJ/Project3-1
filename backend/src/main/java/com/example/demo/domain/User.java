@@ -1,52 +1,99 @@
-package com.example.demo.domain; // 이 클래스가 domain 패키지에 속함
+package com.example.demo.domain;
 
-import jakarta.persistence.*; // JPA 관련 어노테이션들을 사용하기 위해 임포트
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * User 엔티티 클래스
- * 데이터베이스의 테이블과 매핑되는 객체로, 사용자 정보를 저장하는 역할을 함
+ * - 데이터베이스의 user 테이블과 매핑되는 클래스
+ * - 회원 정보를 담는 역할
  */
-@Entity // 이 클래스가 JPA 엔티티임을 명시 (데이터베이스 테이블로 매핑됨)
+@Entity // 이 클래스가 JPA 엔티티임을 나타냄 (DB 테이블로 매핑)
+@Table(name = "user") // DB의 테이블명 지정
 public class User {
 
-    @Id // 이 필드가 기본 키(PK)임을 명시
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // DB에서 자동으로 증가(AUTO_INCREMENT)되도록 설정
-    private Long id; // 사용자 고유 ID (자동 생성)
+    @Id // 기본 키(PK) 필드
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // DB에서 자동 증가 (AUTO_INCREMENT)
+    private Long id;
 
-    private String username; // 사용자 이름 (직접 입력 받음)
-    private String email;    // 사용자 이메일 (직접 입력 받음)
+    @Column(nullable = false, unique = true) // NOT NULL + UNIQUE 제약 조건
+    private String email; // 사용자 이메일 (로그인 ID)
 
-    // 기본 생성자 (JPA에서 필수로 요구함)
-    public User() {}
+    @Column(nullable = false) // NOT NULL
+    private String password; // 사용자 비밀번호 (암호화해서 저장 권장)
 
-    // 사용자 이름과 이메일을 받아 필드를 초기화하는 생성자
-    public User(String username, String email) {
-        this.username = username;
-        this.email = email;
+    @Column(nullable = false)
+    private String username; // 사용자 실명 (이름)
+
+    @Column(nullable = false, unique = true)
+    private String nickname; // 닉네임 (중복 불가)
+
+    @Column(nullable = false, unique = true)
+    private String phone; // 전화번호 (중복 불가)
+
+    @Enumerated(EnumType.STRING) // enum을 문자열 형태로 저장 (예: 'M', 'F')
+    private Gender gender; // 성별
+
+    private LocalDateTime createdAt = LocalDateTime.now(); // 가입 시각 (기본값: 현재 시간)
+
+    // 성별을 나타내는 열거형 타입 (DB에는 'M' 또는 'F'로 저장됨)
+    public enum Gender {
+        M, F
     }
 
-    // getter: 외부에서 id 값을 조회할 수 있게 함
+    // 기본 생성자 (JPA는 반드시 필요함)
+    public User() {}
+
+    // === Getter / Setter 메서드 ===
+    // 캡슐화를 위해 외부에서 접근 시 getter/setter 사용
+
     public Long getId() {
         return id;
     }
 
-    // getter: 외부에서 username 값을 조회할 수 있게 함
-    public String getUsername() {
-        return username;
-    }
-
-    // getter: 외부에서 email 값을 조회할 수 있게 함
     public String getEmail() {
         return email;
     }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    // setter: 외부에서 username 값을 설정할 수 있게 함
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
     public void setUsername(String username) {
         this.username = username;
     }
 
-    // setter: 외부에서 email 값을 설정할 수 있게 함
-    public void setEmail(String email) {
-        this.email = email;
+    public String getNickname() {
+        return nickname;
+    }
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 }

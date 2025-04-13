@@ -1,33 +1,35 @@
-package com.example.demo.service; // 이 클래스가 service 패키지에 속함을 명시
+package com.example.demo.service;
 
-import com.example.demo.domain.User; // User 엔티티 클래스 임포트
-import com.example.demo.repository.UserRepository; // UserRepository 인터페이스 임포트
-import org.springframework.beans.factory.annotation.Autowired; // 의존성 주입을 위한 어노테이션
-import org.springframework.stereotype.Service; // 이 클래스가 서비스 레이어임을 나타내는 어노테이션
+import com.example.demo.domain.User;
+import com.example.demo.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
 /**
- * 비즈니스 로직을 담당하는 서비스 클래스
- * 예: 회원 가입 처리, 사용자 조회 등
+ * 사용자 관련 비즈니스 로직을 처리하는 서비스 클래스
+ * - 회원가입 등의 사용자 관련 기능을 담당
+ * - 공통 기능을 담고 있는 GenericService<User>를 상속받아 기능 확장
  */
-@Service // Spring이 이 클래스를 서비스 빈(bean)으로 인식하게 함
-public class UserService {
-
-    @Autowired // UserRepository를 자동으로 주입받음 (DI)
-    private UserRepository userRepository;
+@Service // Spring이 이 클래스를 서비스 컴포넌트로 인식해서 빈으로 등록
+public class UserService extends GenericService<User> {
 
     /**
-     * 회원 정보를 받아서 데이터베이스에 저장하는 메서드
+     * UserService 생성자
+     * - UserRepository를 주입받아 상위 GenericService에 전달
      *
-     * @param username 사용자 이름
-     * @param email 사용자 이메일
+     * @param userRepository 사용자 정보를 저장/조회하는 JPA 리포지터리
      */
-    public void registerUser(String username, String email) {
-        // User 객체 생성 후, 전달받은 값으로 필드 설정
-        User user = new User();
-        user.setUsername(username);
-        user.setEmail(email);
+    public UserService(UserRepository userRepository) {
+        super(userRepository); // GenericService<T>에 userRepository를 전달
+    }
 
-        // JPA를 이용해 사용자 정보를 데이터베이스에 저장
-        userRepository.save(user);
+    /**
+     * 회원가입 기능
+     * - User 객체를 전달받아 DB에 저장하는 역할
+     * - 필요한 유효성 검사나 추가 로직이 있다면 이 메서드에 작성 가능
+     *
+     * @param user 저장할 사용자 객체
+     */
+    public void registerUser(User user) {
+        save(user); // GenericService의 save() 메서드 호출 (JPA save)
     }
 }
