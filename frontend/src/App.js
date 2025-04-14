@@ -3,9 +3,10 @@ import axios from 'axios';
 
 import React from 'react';
 import JoinPage from './pages/JoinPage';
+import LogIn from './pages/LogIn';
 
 function App() {
-  return <JoinPage />;
+  return <LogIn />;
 }
 
 export default App;
