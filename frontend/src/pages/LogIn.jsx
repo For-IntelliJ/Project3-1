@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PasswordInput from '../components/PasswordInput';
+import axios from 'axios';
 
 class LogIn extends Component {
   constructor(props) {
@@ -22,10 +22,29 @@ class LogIn extends Component {
     }));
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('로그인 데이터:', this.state.formData);
-    // 실제 로그인 로직은 여기에 추가
+
+    try {
+      const response = await axios.post(
+        'http://localhost:8080/api/login',
+        this.state.formData,
+      );
+
+      // JWT 토큰 받아오기
+      const token = response.data.token;
+      console.log('JWT 토큰:', token);
+
+      // 브라우저에 저장 (localStorage or sessionStorage)
+      localStorage.setItem('accessToken', token);
+
+      // 로그인 성공 메시지 or 페이지 이동
+      alert('로그인 성공!');
+      window.location.href = '/home'; // 또는 navigate('/home') 등
+    } catch (error) {
+      alert('로그인 실패! 이메일/비밀번호를 확인하세요.');
+      console.error(error);
+    }
   };
 
   render() {

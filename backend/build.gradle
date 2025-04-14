@@ -24,6 +24,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.mariadb.jdbc:mariadb-java-client'
 	implementation 'org.mariadb.jdbc:mariadb-java-client:3.2.0'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'  //jwt 토큰 로그인
+	implementation 'org.springframework.boot:spring-boot-starter-security'//비밀번호 해시
+
+
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
