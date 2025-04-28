@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "user") // DB의 테이블명 지정
 public class User {
 
-    @Id // 기본 키(PK) 필드
+    @Id // 기본 키(PK) 필   드
     @GeneratedValue(strategy = GenerationType.IDENTITY) // DB에서 자동 증가 (AUTO_INCREMENT)
     private Long id;
 
