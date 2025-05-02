@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       colors: {
         primary: '#ffffff',
-        hover: '#3D4EFE',
+        hover: '#3D4EFE', //오 우리 기본 색 설정해 뒀구나!
         font: '#37474F',
         line: '#777777',
         warning: '#E44B4B',
