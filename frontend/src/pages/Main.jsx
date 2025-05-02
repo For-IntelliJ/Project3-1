@@ -77,6 +77,55 @@ function Main() {
                 </div>
             </main>
 
+            {/* 배너 아래 네모 버튼 4개 */}
+            <div className="flex justify-center items-center space-x-6 my-6">
+                {/* 첫 번째 버튼 - 지역 */}
+                <div
+                    className="w-[220px] h-16 bg-white-200 hover:bg-gray-300 rounded-md flex items-center px-4 space-x-4">
+                    <img src="/img/Local_icon.png" alt="지역 아이콘" className="w-6 h-6"/>
+                    <span className="text-lg font-pretendard font-semibold">지역</span>
+                </div>
+
+                {/* 두 번째 버튼 예시 */}
+                <div
+                    className="w-[220px] h-16 bg-white-200 hover:bg-gray-300 rounded-md flex items-center px-4 space-x-4">
+                    <img src="/img/Type_icon.png" alt="유형 아이콘" className="w-6 h-6"/>
+                    <span className="text-lg font-pretendard font-semibold">유형</span>
+                </div>
+
+                {/* 세 번째 버튼 예시 */}
+                <div
+                    className="w-[220px] h-16 bg-white-200 hover:bg-gray-300 rounded-md flex items-center px-4 space-x-4">
+                    <img src="/img/Category_icon.png" alt="카테고리 아이콘" className="w-6 h-6"/>
+                    <span className="text-lg font-pretendard font-semibold">카테고리</span>
+                </div>
+                
+                {/* 네 번째 버튼 예시 */}
+                <div
+                    className="w-[220px] h-16 bg-white-200 hover:bg-gray-300 rounded-md flex items-center px-4 space-x-4">
+                    <img src="/img/Level_icon.png" alt="난이도 아이콘" className="w-6 h-6"/>
+                    <span className="text-lg font-pretendard font-semibold">난이도</span>
+                </div>
+            </div>
+
+
+            <div className="flex space-x-4 mb-auto">
+                <h1>단체</h1>
+                <h1>스터디</h1>
+                <h1>베이킹</h1>
+                <h1>반지</h1>
+                <h1>드로잉</h1>
+                <h1>선물</h1>
+                <h1>데이트</h1>
+                <h1>향수</h1>
+                <h1>스포츠</h1>
+                <h1>목공</h1>
+            </div>
+
+            <div>
+                <h1>잇다에서 사랑받고 있는 클래스</h1>
+            </div>
+
 
             {/* Footer */}
             <footer className="bg-gray-800 text-white p-4">
