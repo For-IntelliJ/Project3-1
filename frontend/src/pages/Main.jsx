@@ -27,7 +27,29 @@ const classes = [
         instructor: '강다연',
         people: 5,
     },
+
 ];
+
+const classes2 =[
+     {
+        image: '/img/Class_image_4.jpg',
+        title: '컴퓨터적 사고하는 방법',
+        instructor: '백승범',
+        people: 5,
+    },
+    {
+        image: '/img/Class_image_5.jpg',
+        title: '중등수학 같이 배워봐요φ(*￣0￣)',
+        instructor: '정승제',
+        people: 5,
+    },
+    {
+        image: '/img/Class_image_6.jpg',
+        title: '스프링부트 파헤치기',
+        instructor: '조동일',
+        people: 15,
+    },
+]
 
 
 function Main() {
@@ -115,7 +137,7 @@ function Main() {
 
 
                 {/* 배너 아래 네모 버튼 4개 */}
-                <div className="flex justify-center items-center space-x-14 my-6">
+                <div className="flex justify-center items-center space-x-14 my-6 pt-10">
                     {/* 첫 번째 버튼 - 지역 */}
                     <div
                         className="w-[220px] h-20 bg-white-200 hover:bg-gray-300 rounded-md flex items-center px-4 space-x-4 shadow-md"
@@ -169,12 +191,12 @@ function Main() {
                 </div>
 
                 {/*클래스 관련 섹션*/}
-                <section className ="py-16">
+                <section className ="py-10">
                     <div>
                         <h2 className="text-xl font-bold text-left mb-6 text-gray-700 ml-80">
-                            몽글몽글 ⌈감성충만⌋ 클래스들은 어때요? 🥰
+                            💛 몽글몽글 ⌈감성충만⌋ 클래스들은 어때요? 💛
                         </h2>
-                        <div className="flex flex-wrap gap-11 justify-center">
+                        <div className="flex flex-wrap gap-10 justify-center">
                             {classes.map((classInfo, index) => (
                                 <ClassCard
                                     key={index}
@@ -188,11 +210,33 @@ function Main() {
                     </div>
                 </section>
 
+                {/*클래스 관련 섹션*/}
+                <section className ="py-6">
+                    <div>
+                        <h2 className="text-xl font-bold text-left mb-6 text-gray-700 ml-80">
+                            오늘은 왠지 머리 쓰고 싶은 날이네...🤔🤔
+                        </h2>
+                        <div className="flex flex-wrap gap-10 justify-center">
+                            {classes2.map((classInfo, index) => (
+                                <ClassCard
+                                    key={index}
+                                    image={classInfo.image}
+                                    title={classInfo.title}
+                                    instructor={classInfo.instructor}
+                                    people={classInfo.people}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+
+
             </main>
 
 
             {/* Footer */}
-            <footer className="bg-gray-800 text-white p-4">
+            <footer className="bg-gray-800 text-white p-4 mt-24">
                 <div className="container mx-auto text-center">
                     &copy; {new Date().getFullYear()} My Website. All rights reserved.
                 </div>
