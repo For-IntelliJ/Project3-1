@@ -1,10 +1,34 @@
 import React, {useEffect, useState} from 'react';
+import ClassCard from '../components/ClassCard'; // ClassCard 컴포넌트 임포트
 
 
 const banners = [//배너 2장을 담아 둘 배열
     '/img/Benner1.svg',
     '/img/Benner2.svg',
 ];
+
+
+const classes = [
+    {
+        image: '/img/Class_image_1.jpg',
+        title: '귀염뽀짝 헤.꾸  ☆*o(≧▽≦)o*☆',
+        instructor: '강보은',
+        people: 3,  // 숫자로 변경
+    },
+    {
+        image: '/img/Class_image_2.jpg',
+        title: '가지각색 풍선 교실🎈',
+        instructor: '최재현',
+        people: 0,
+    },
+    {
+        image: '/img/Class_image_3.jpg',
+        title: '캔버스와 유화의 이야기',
+        instructor: '강다연',
+        people: 5,
+    },
+];
+
 
 function Main() {
 
@@ -127,7 +151,8 @@ function Main() {
                         <img src="/img/Category_icon.png" alt="카테고리 아이콘" className="w-14 h-14"/>
                         <div className="h-20 flex flex-col justify-center">
                             <span className="text-[16px] font-pretendard font-semibold leading-none ml-5">카테고리</span>
-                            <h1 className="text-[10px] font-pretendard text-gray-600 mt-[10px] leading-none">카테고리별 다양한 클래스</h1>
+                            <h1 className="text-[10px] font-pretendard text-gray-600 mt-[10px] leading-none">카테고리별 다양한
+                                클래스</h1>
                         </div>
                     </div>
 
@@ -143,25 +168,27 @@ function Main() {
                     </div>
                 </div>
 
+                {/*클래스 관련 섹션*/}
+                <section className ="py-16">
+                    <div>
+                        <h2 className="text-xl font-bold text-left mb-6 text-gray-700 ml-80">
+                            몽글몽글 ⌈감성충만⌋ 클래스들은 어때요? 🥰
+                        </h2>
+                        <div className="flex flex-wrap gap-11 justify-center">
+                            {classes.map((classInfo, index) => (
+                                <ClassCard
+                                    key={index}
+                                    image={classInfo.image}
+                                    title={classInfo.title}
+                                    instructor={classInfo.instructor}
+                                    people={classInfo.people}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
             </main>
-
-
-            <div className="flex space-x-4 mb-auto">
-                <h1>단체</h1>
-                <h1>스터디</h1>
-                <h1>베이킹</h1>
-                <h1>반지</h1>
-                <h1>드로잉</h1>
-                <h1>선물</h1>
-                <h1>데이트</h1>
-                <h1>향수</h1>
-                <h1>스포츠</h1>
-                <h1>목공</h1>
-            </div>
-
-            <div>
-                <h1>잇다에서 사랑받고 있는 클래스</h1>
-            </div>
 
 
             {/* Footer */}
