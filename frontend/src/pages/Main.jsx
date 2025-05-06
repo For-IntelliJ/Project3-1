@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import ClassCard from '../components/ClassCard'; // ClassCard 컴포넌트 임포트
+import { Link } from 'react-router-dom';
+
 
 
 const banners = [//배너 2장을 담아 둘 배열
@@ -87,7 +89,7 @@ function Main() {
                                     <a href="#register" className="font-pretendard hover:underline">클래스등록</a>
                                 </li>
                                 <li>
-                                    <a href="#login" className="font-pretendard hover:underline">로그인</a>
+                                    <Link to="/login" className="font-pretendard hover:underline">로그인</Link>
                                 </li>
                             </ul>
                         </nav>

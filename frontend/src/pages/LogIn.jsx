@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 
 class LogIn extends Component {
   constructor(props) {
@@ -26,10 +28,7 @@ class LogIn extends Component {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        'http://localhost:8080/api/login',
-        this.state.formData,
-      );
+      const response = await axios.post('http://localhost:8080/user/login', this.state.formData);UserService.validateUser()
 
       // JWT 토큰 받아오기
       const token = response.data.token;
@@ -103,9 +102,9 @@ class LogIn extends Component {
 
               <p className="text-center text-sm">
                 계정이 없으신가요?{' '}
-                <a href="/JoinPage" className="text-blue-500">
+                <Link to="/join" className="text-blue-500">
                   회원가입
-                </a>
+                </Link>
               </p>
             </div>
           </form>

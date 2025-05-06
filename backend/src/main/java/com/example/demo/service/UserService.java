@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  */
 @Service // Spring이 이 클래스를 서비스 컴포넌트로 인식해서 빈으로 등록
 public class UserService extends GenericService<User> {
-
+    private final UserRepository userRepository;
     /**
      * UserService 생성자
      * - UserRepository를 주입받아 상위 GenericService에 전달
@@ -20,6 +20,7 @@ public class UserService extends GenericService<User> {
      */
     public UserService(UserRepository userRepository) {
         super(userRepository); // GenericService<T>에 userRepository를 전달
+        this.userRepository = userRepository; // 따로 저장
     }
 
     /**
@@ -31,5 +32,13 @@ public class UserService extends GenericService<User> {
      */
     public void registerUser(User user) {
         save(user); // GenericService의 save() 메서드 호출 (JPA save)
+    }
+
+    public boolean validateUser(String email, String password) {
+        User existingUser = userRepository.findByEmail(email);
+        if (existingUser != null && existingUser.getPassword().equals(password)) {
+            return true;
+        }
+        return false;
     }
 }

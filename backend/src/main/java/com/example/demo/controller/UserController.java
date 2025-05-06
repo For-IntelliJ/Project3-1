@@ -3,6 +3,7 @@ package com.example.demo.controller;
 // 사용자 관련 엔티티와 서비스 클래스 import
 import com.example.demo.domain.User;
 import com.example.demo.service.UserService;
+import com.example.demo.domain.LoginRequest;
 
 import org.springframework.beans.factory.annotation.Autowired; // 의존성 주입
 import org.springframework.web.bind.annotation.*; // REST API 관련 어노테이션들
@@ -34,4 +35,17 @@ public class UserController {
         userService.registerUser(user); // 실제 저장 처리
         return "회원가입 완료!"; // 클라이언트에게 응답
     }
+
+    @PostMapping("/login")
+    public String loginUser(@RequestBody LoginRequest loginRequest) {
+        System.out.println("🔥 로그인 요청: " + loginRequest.getEmail());
+
+        boolean isValid = userService.validateUser(loginRequest.getEmail(), loginRequest.getPassword());
+        if (isValid) {
+            return "로그인 성공!";
+        } else {
+            return "로그인 실패: 이메일 또는 비밀번호가 틀렸습니다.";
+        }
+    }
+
 }
