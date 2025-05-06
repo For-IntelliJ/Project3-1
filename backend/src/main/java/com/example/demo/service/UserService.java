@@ -4,6 +4,8 @@ import com.example.demo.domain.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * 사용자 관련 비즈니스 로직을 처리하는 서비스 클래스
  * - 회원가입 등의 사용자 관련 기능을 담당
@@ -35,10 +37,12 @@ public class UserService extends GenericService<User> {
     }
 
     public boolean validateUser(String email, String password) {
-        User existingUser = userRepository.findByEmail(email);
-        if (existingUser != null && existingUser.getPassword().equals(password)) {
-            return true;
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            return user.getPassword().equals(password);
         }
         return false;
     }
+
 }
