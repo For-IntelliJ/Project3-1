@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom'; //마이페이지 클릭시 사용되는 Link import
 import ClassCard from '../components/ClassCard'; // ClassCard 컴포넌트 임포트
-import { Link } from 'react-router-dom';
 
 
 

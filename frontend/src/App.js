@@ -12,7 +12,7 @@ function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Main/>}/> {/*메인페이지 기본 설정*/}
+                <Route path="/" element={<Main/>}/> {/* 메인페이지 기본 설정*/}
                 <Route path="/login" element={<LogIn/>}/>{/*로그인페이지*/}
                 <Route path="/join" element={<JoinPage/>}/> {/* 홈 페이지는 옵션 */}
                 <Route path="/mypage" element={<MyPage/>}/> {/*마이페이지*/}
