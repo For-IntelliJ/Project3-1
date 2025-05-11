@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import { Link } from 'react-router-dom'; //마이페이지 클릭시 사용되는 Link import
 import ClassCard from '../components/ClassCard'; // ClassCard 컴포넌트 임포트
 
 
@@ -105,13 +106,14 @@ function Main() {
                                 </a>
                             </li>
                             <li>
-                                <a
-                                    href="#mypage"
+                                <Link
+                                    to="/mypage"
                                     className="text-lg font-bold font-pretendard hover:underline hover:text-[#3D4EFE] transition-colors duration-200"
                                 >
                                     마이페이지
-                                </a>
+                                </Link>
                             </li>
+
                         </ul>
                     </nav>
 
