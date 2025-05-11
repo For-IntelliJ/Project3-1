@@ -10,6 +10,8 @@ const JoinPage = () => {
     nickname: '',
     gender: '',
     phone: '',
+    role: 'mentee',
+    loginType: 'local',
   });
 
   const [isPasswordValid, setIsPasswordValid] = useState(false);
