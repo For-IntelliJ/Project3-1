@@ -45,17 +45,18 @@ tasks.named('test') {
 tasks.register('startFrontend', Exec) {
 	workingDir = file('../frontend')
 
-	// 사용자별 yarn.cmd 경로 자동 설정
 	def userHome = System.getProperty("user.home")
 	def yarnCmd = "${userHome}\\AppData\\Roaming\\npm\\yarn.cmd"
 
-	// Windows용 yarn.cmd 실행 (detach 비슷하게)
 	if (System.properties['os.name'].toLowerCase().contains('windows')) {
-		commandLine 'cmd', '/c', "start", yarnCmd, 'start'
+		// Windows: 새 창으로 실행 (콘솔 대기 없음)
+		commandLine 'cmd', '/c', 'start', '', yarnCmd, 'start'
 	} else {
-		// Mac/Linux용
+		// macOS/Linux: background 실행
 		commandLine 'sh', '-c', 'yarn start &'
 	}
+	// 무한 대기 방지
+	ignoreExitValue = true
 }
 
 

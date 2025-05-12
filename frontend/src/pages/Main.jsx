@@ -86,7 +86,7 @@ function Main() {
                                     <a href="#more" className="font-pretendard hover:underline">더보기</a>
                                 </li>
                                 <li>
-                                    <a href="#register" className="font-pretendard hover:underline">클래스등록</a>
+                                    <Link to="/calssmaker" className="font-pretendard hover:underline">클래스등록</Link>
                                 </li>
                                 <li>
                                     <Link to="/login" className="font-pretendard hover:underline">로그인</Link>
