@@ -8,10 +8,14 @@ import ClassMaker from "./pages/ClassMaker";
 import LogIn from "./pages/LogIn";
 import Main from "./pages/Main";
 import MyPage from "./pages/MyPage";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 
 function App() {
-  return (<Router>
+  return (
+    <Router>
+      <Header/>
       <Routes>
         <Route path="/" element={<Main />} /> {/* 메인페이지 기본 설정*/}
         <Route path="/login" element={<LogIn />} />{/*로그인페이지*/}
@@ -20,7 +24,9 @@ function App() {
         <Route path="/calssmaker" element={<ClassMaker />} /> {/* 클래스 생성/등록 페이지*/}
         {/* 필요한 다른 페이지도 여기에 추가 가능 */}
       </Routes>
-    </Router>);
+      <Footer/>
+    </Router>
+  );
 }
 
 export default App;
