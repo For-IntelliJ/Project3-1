@@ -4,6 +4,8 @@ import com.example.demo.domain.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * 사용자 관련 비즈니스 로직을 처리하는 서비스 클래스
  */
@@ -15,6 +17,16 @@ public class UserService extends GenericService<User> {
     public UserService(UserRepository userRepository) {
         super(userRepository);
         this.userRepository = userRepository;
+    private final UserRepository userRepository;
+    /**
+     * UserService 생성자
+     * - UserRepository를 주입받아 상위 GenericService에 전달
+     *
+     * @param userRepository 사용자 정보를 저장/조회하는 JPA 리포지터리
+     */
+    public UserService(UserRepository userRepository) {
+        super(userRepository); // GenericService<T>에 userRepository를 전달
+        this.userRepository = userRepository; // 따로 저장
     }
 
     /**
@@ -31,4 +43,14 @@ public class UserService extends GenericService<User> {
         return userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("해당 사용자가 존재하지 않습니다. id=" + id));
     }
+
+    public boolean validateUser(String email, String password) {
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            return user.getPassword().equals(password);
+        }
+        return false;
+    }
+
 }

@@ -4,6 +4,7 @@ import com.example.demo.domain.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.example.demo.domain.LoginRequest;
 
 @RestController
 @RequestMapping("/api/users")
@@ -26,4 +27,17 @@ public class UserController {
     public User getUserById(@PathVariable Long id) {
         return userService.findById(id);
     }
+
+    @PostMapping("/login")
+    public String loginUser(@RequestBody LoginRequest loginRequest) {
+        System.out.println("🔥 로그인 요청: " + loginRequest.getEmail());
+
+        boolean isValid = userService.validateUser(loginRequest.getEmail(), loginRequest.getPassword());
+        if (isValid) {
+            return "로그인 성공!";
+        } else {
+            return "로그인 실패: 이메일 또는 비밀번호가 틀렸습니다.";
+        }
+    }
+
 }
