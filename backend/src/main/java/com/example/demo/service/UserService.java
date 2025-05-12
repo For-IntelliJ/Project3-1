@@ -6,30 +6,29 @@ import org.springframework.stereotype.Service;
 
 /**
  * 사용자 관련 비즈니스 로직을 처리하는 서비스 클래스
- * - 회원가입 등의 사용자 관련 기능을 담당
- * - 공통 기능을 담고 있는 GenericService<User>를 상속받아 기능 확장
  */
-@Service // Spring이 이 클래스를 서비스 컴포넌트로 인식해서 빈으로 등록
+@Service
 public class UserService extends GenericService<User> {
 
-    /**
-     * UserService 생성자
-     * - UserRepository를 주입받아 상위 GenericService에 전달
-     *
-     * @param userRepository 사용자 정보를 저장/조회하는 JPA 리포지터리
-     */
+    private final UserRepository userRepository;
+
     public UserService(UserRepository userRepository) {
-        super(userRepository); // GenericService<T>에 userRepository를 전달
+        super(userRepository);
+        this.userRepository = userRepository;
     }
 
     /**
      * 회원가입 기능
-     * - User 객체를 전달받아 DB에 저장하는 역할
-     * - 필요한 유효성 검사나 추가 로직이 있다면 이 메서드에 작성 가능
-     *
-     * @param user 저장할 사용자 객체
      */
     public void registerUser(User user) {
-        save(user); // GenericService의 save() 메서드 호출 (JPA save)
+        save(user);
+    }
+
+    /**
+     * ID로 사용자 조회
+     */
+    public User findById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("해당 사용자가 존재하지 않습니다. id=" + id));
     }
 }
