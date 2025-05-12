@@ -14,15 +14,9 @@ public class UserService extends GenericService<User> {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        super(userRepository);
-        this.userRepository = userRepository;
-    private final UserRepository userRepository;
     /**
      * UserService 생성자
      * - UserRepository를 주입받아 상위 GenericService에 전달
-     *
-     * @param userRepository 사용자 정보를 저장/조회하는 JPA 리포지터리
      */
     public UserService(UserRepository userRepository) {
         super(userRepository); // GenericService<T>에 userRepository를 전달
@@ -44,13 +38,11 @@ public class UserService extends GenericService<User> {
                 .orElseThrow(() -> new RuntimeException("해당 사용자가 존재하지 않습니다. id=" + id));
     }
 
+    /**
+     * 사용자 인증
+     */
     public boolean validateUser(String email, String password) {
         Optional<User> optionalUser = userRepository.findByEmail(email);
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            return user.getPassword().equals(password);
-        }
-        return false;
+        return optionalUser.map(user -> user.getPassword().equals(password)).orElse(false);
     }
-
 }
