@@ -43,11 +43,21 @@ tasks.named('test') {
 
 // ✅ 프론트엔드 자동 실행 (yarn.cmd 절대경로 명시)
 tasks.register('startFrontend', Exec) {
-	workingDir = file('../frontend') // backend 기준 ../frontend 폴더
-	commandLine = [
-			"C:/Users/wogus/AppData/Roaming/npm/yarn.cmd", "start"
-	] // ✅ yarn.cmd 경로 직접 지정
+	workingDir = file('../frontend')
+
+	// 사용자별 yarn.cmd 경로 자동 설정
+	def userHome = System.getProperty("user.home")
+	def yarnCmd = "${userHome}\\AppData\\Roaming\\npm\\yarn.cmd"
+
+	// Windows용 yarn.cmd 실행 (detach 비슷하게)
+	if (System.properties['os.name'].toLowerCase().contains('windows')) {
+		commandLine 'cmd', '/c', "start", yarnCmd, 'start'
+	} else {
+		// Mac/Linux용
+		commandLine 'sh', '-c', 'yarn start &'
+	}
 }
+
 
 tasks.named('bootRun') {
 	dependsOn 'startFrontend'

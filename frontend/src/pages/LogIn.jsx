@@ -28,7 +28,7 @@ class LogIn extends Component {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8080/user/login', this.state.formData);UserService.validateUser()
+      const response = await axios.post('http://localhost:8080/user/login', this.state.formData);
 
       // JWT 토큰 받아오기
       const token = response.data.token;
