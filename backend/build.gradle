@@ -49,13 +49,14 @@ tasks.register('startFrontend', Exec) {
 	def yarnCmd = "${userHome}\\AppData\\Roaming\\npm\\yarn.cmd"
 
 	if (System.properties['os.name'].toLowerCase().contains('windows')) {
-		// Windows: 새 창으로 실행 (콘솔 대기 없음)
-		commandLine 'cmd', '/c', 'start', '', yarnCmd, 'start'
+		// Windows: 새 창 없이 yarn 직접 실행 (대기 방지)
+		commandLine yarnCmd, 'start'
 	} else {
-		// macOS/Linux: background 실행
+		// macOS/Linux: 백그라운드 실행
 		commandLine 'sh', '-c', 'yarn start &'
 	}
-	// 무한 대기 방지
+
+	// 실행 결과 무시 (무한 대기 방지)
 	ignoreExitValue = true
 }
 
