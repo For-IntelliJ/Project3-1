@@ -29,22 +29,20 @@ class LogIn extends Component {
 
     try {
       const response = await axios.post('http://localhost:8080/user/login', this.state.formData);
-
-      // JWT 토큰 받아오기
       const token = response.data.token;
       console.log('JWT 토큰:', token);
 
-      // 브라우저에 저장 (localStorage or sessionStorage)
       localStorage.setItem('accessToken', token);
 
-      // 로그인 성공 메시지 or 페이지 이동
       alert('로그인 성공!');
-      window.location.href = '/home'; // 또는 navigate('/home') 등
+      window.location.href = '/home'; // 또는 navigate('/home') 사용 가능
     } catch (error) {
       alert('로그인 실패! 이메일/비밀번호를 확인하세요.');
       console.error(error);
     }
   };
+
+
 
   render() {
     const { formData } = this.state;
