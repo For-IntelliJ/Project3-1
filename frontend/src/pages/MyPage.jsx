@@ -35,40 +35,6 @@ const MyPage = () => {
 
     return (
         <div className="flex flex-col min-h-screen">
-            {/* 헤더 */}
-            <header className="text-black p-4 shadow-md">
-                <div className="mx-auto max-w-[1100px] space-y-4">
-                    <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center space-x-5">
-                            <img src="/img/MainLogo.png" alt="Main Logo" className="h-10"/>
-                            <h1 className="text-2xl font-bold font-pretendard ">잇다</h1>
-                        </div>
-                        <nav>
-                            <ul className="flex space-x-6">
-                                <li><a href="#more" className="font-pretendard hover:underline">더보기</a></li>
-                                <li><a href="#register" className="font-pretendard hover:underline">클래스등록</a></li>
-                                <li><Link to="/login" className="font-pretendard hover:underline">로그인</Link></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <nav>
-                        <ul className="flex space-x-8">
-                            <li>
-                                <a href="#search"
-                                   className="text-lg font-bold font-pretendard hover:underline hover:text-[#3D4EFE] transition-colors duration-200">
-                                    클래스검색
-                                </a>
-                            </li>
-                            <li>
-                                <Link to="/mypage"
-                                      className="text-lg font-bold font-pretendard hover:underline hover:text-[#3D4EFE] transition-colors duration-200">
-                                    마이페이지
-                                </Link>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </header>
 
             {/* 메인 콘텐츠 */}
             <main className="flex-grow overflow-hidden relative">
@@ -152,13 +118,6 @@ const MyPage = () => {
                     </div>
                 </div>
             </main>
-
-            {/* 푸터 */}
-            <footer className="bg-gray-800 text-white p-4 mt-24">
-                <div className="container mx-auto text-center">
-                    &copy; {new Date().getFullYear()} My Website. All rights reserved.
-                </div>
-            </footer>
         </div>
     );
 };
