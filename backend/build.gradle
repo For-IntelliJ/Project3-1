@@ -51,7 +51,7 @@ tasks.register('startFrontend', Exec) {
 
 	if (System.properties['os.name'].toLowerCase().contains('windows')) {
 		// Windows: 새 창 없이 yarn 직접 실행 (대기 방지)
-		commandLine yarnCmd, 'start'
+		commandLine 'cmd', '/c', 'start', '', yarnCmd, 'start'
 	} else {
 		// macOS/Linux: 백그라운드 실행
 		commandLine 'sh', '-c', 'yarn start &'
