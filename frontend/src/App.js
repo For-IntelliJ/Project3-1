@@ -13,6 +13,7 @@ import Footer from "./components/Footer";
 
 
 function App() {
+<<<<<<< Updated upstream
   return (
     <Router>
       <Header/>
@@ -27,6 +28,19 @@ function App() {
       <Footer/>
     </Router>
   );
+=======
+    return (
+        <Router>
+            <Routes>
+                <Route path="/main" element={<Main/>}/> {/* 메인페이지 기본 설정*/}
+                <Route path="/login" element={<LogIn/>}/>{/*로그인페이지*/}
+                <Route path="/join" element={<JoinPage/>}/> {/* 홈 페이지는 옵션 */}
+                <Route path="/" element={<MyPage/>}/> {/*마이페이지*/}
+                {/* 필요한 다른 페이지도 여기에 추가 가능 */}
+            </Routes>
+        </Router>
+    );
+>>>>>>> Stashed changes
 }
 
 export default App;
