@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const MyPage = () => {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -21,13 +22,13 @@ const MyPage = () => {
         formData.append('file', selectedFile);
 
         try {
-            const response = await fetch('http://localhost:8080/api/upload', {
-                method: 'POST',
-                body: formData,
+            const response = await axios.post('http://localhost:8080/api/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
             });
 
-            const result = await response.json();
-            alert('업로드 성공: ' + result.imageUrl);
+            alert('업로드 성공: ' + response.data.imageUrl);
         } catch (err) {
             console.error('업로드 실패:', err);
         }
