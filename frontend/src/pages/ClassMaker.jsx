@@ -1,5 +1,5 @@
 // 수정된 ClassMaker.jsx
-
+// 이것은 클래스 등록 페이지
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
