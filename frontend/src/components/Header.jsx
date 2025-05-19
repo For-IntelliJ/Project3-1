@@ -1,69 +1,65 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 
-
 function Header() {
   return (
-    <div className="flex flex-col pt-4 mb-1">
-      {/* 헤더 */}
-      <header className="text-black p-4 shadow-md">
-        <div className="mx-auto max-w-[1100px] space-y-4">
+      <div className="flex flex-col pt-4 mb-1">
+        {/* 헤더 */}
+        <header className="text-black p-4 shadow-md">
+          <div className="mx-auto max-w-[1100px] space-y-4">
 
-          {/* 상단 로고 + 잇다 텍스트 + 우측 메뉴들 */}
-          <div className="flex items-center justify-between mb-6">
-            {/* 좌측: 로고 + 텍스트 */}
-            <div className="flex items-center space-x-5">
-              <img src="/img/MainLogo.png" alt="Main Logo" className="h-10"/>
-              <h1 className="text-2xl font-bold font-pretendard">잇다</h1>
+            {/* 상단 로고 + 잇다 텍스트 + 우측 메뉴들 */}
+            <div className="flex items-center justify-between mb-6">
+              {/* 좌측: 로고 + 텍스트 */}
+              <div className="flex items-center space-x-5">
+                <img src="/img/MainLogo.png" alt="Main Logo" className="h-10"/>
+                <Link to="/" className="text-2xl font-bold font-pretendard">
+                  잇다
+                </Link>
+              </div>
+
+              {/* 우측: 메뉴들 */}
+              <nav>
+                <ul className="flex space-x-6">
+                  <li>
+                    <a href="#more" className="font-pretendard hover:underline">더보기</a>
+                  </li>
+                  <li>
+                    <Link to="/classmaker" className="font-pretendard hover:underline">클래스등록</Link>
+                  </li>
+                  <li>
+                    <Link to="/login" className="font-pretendard hover:underline">로그인</Link>
+                  </li>
+                </ul>
+              </nav>
             </div>
 
-            {/* 우측: 메뉴들 */}
+            {/* 중간 네비게이션: 클래스검색 / 마이페이지 */}
             <nav>
-              <ul className="flex space-x-6">
+              <ul className="flex space-x-8">
                 <li>
-                  <a href="#more" className="font-pretendard hover:underline">더보기</a>
+                  <a
+                      href="#search"
+                      className="text-lg font-bold font-pretendard hover:underline hover:text-[#3D4EFE] transition-colors duration-200"
+                  >
+                    클래스검색
+                  </a>
                 </li>
                 <li>
-                  <Link to="/calssmaker" className="font-pretendard hover:underline">클래스등록</Link>
-                </li>
-                <li>
-                  <Link to="/login" className="font-pretendard hover:underline">로그인</Link>
+                  <Link
+                      to="/mypage"
+                      className="text-lg font-bold font-pretendard hover:underline hover:text-[#3D4EFE] transition-colors duration-200"
+                  >
+                    마이페이지
+                  </Link>
                 </li>
               </ul>
             </nav>
+
           </div>
-
-          {/* 중간 네비게이션: 클래스검색 / 마이페이지 */}
-          <nav>
-            <ul className="flex space-x-8">
-              <li>
-                <a
-                  href="#search"
-                  className="text-lg font-bold font-pretendard hover:underline hover:text-[#3D4EFE] transition-colors duration-200"
-                >
-                  클래스검색
-                </a>
-              </li>
-              <li>
-                <Link
-                  to="/mypage"
-                  className="text-lg font-bold font-pretendard hover:underline hover:text-[#3D4EFE] transition-colors duration-200"
-                >
-                  마이페이지
-                </Link>
-              </li>
-
-            </ul>
-          </nav>
-
-        </div>
-      </header>
-    </div>
+        </header>
+      </div>
   );
 }
 
 export default Header;
-
-
-
-
