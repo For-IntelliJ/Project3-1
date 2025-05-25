@@ -6,53 +6,24 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
-//
-//@Configuration
-//public class SecurityConfig {
-//
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("/user/**").permitAll()
-//                        .anyRequest().authenticated()
-//                )
-//                .csrf(csrf -> csrf.disable())
-//                .formLogin(form -> form.disable());
-//
-//        return http.build();
-//    }
-//}
+
 @Configuration
 public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                // (1) WebMvcConfigurer-등록된 CorsConfig 를 사용
-                .cors(Customizer.withDefaults())
-                // (2) REST API 이므로 CSRF 토큰 검사 비활성화
+                .cors(Customizer.withDefaults()) // WebConfig에 등록된 CORS 사용
                 .csrf(csrf -> csrf.disable())
-                // (3) pre-flight OPTIONS 요청은 모두 허용
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
-                        // (4) 인가 없이 열어둘 API 목록
-                        .requestMatchers(
-                                "/api/users/**",
-                                "/api/categories/**",
-                                "/api/regions/**",
-                                "/api/classes/**"
-                        ).permitAll()
-
-                        // (5) 그 외 모든 요청은 인증 필요
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // preflight 허용
+                        .requestMatchers("/user/**").permitAll() // 회원가입 등 열어둠
                         .anyRequest().authenticated()
                 )
-                // (6) formLogin, httpBasic 모두 비활성화
                 .formLogin(form -> form.disable())
                 .httpBasic(Customizer.withDefaults());
 
+
         return http.build();
     }
-
 }
