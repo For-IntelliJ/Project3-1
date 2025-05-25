@@ -11,6 +11,9 @@ import MyPage from "./pages/MyPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import FAQPage from "./pages/FAQPage";
+import CommunityPage from "./pages/CommunityPage";
+import AskQuestionPage from "./pages/AskQuestionPage";
+import QuestionDetailPage from "./pages/QuestionDetailPage";
 
 
 function App() {
@@ -26,6 +29,9 @@ function App() {
                       <Route path="/mypage" element={<MyPage />} />
                       <Route path="/classmaker" element={<ClassMaker />} />
                       <Route path="/faq" element={<FAQPage />} />
+                      <Route path="/community" element={<CommunityPage />} />
+                      <Route path="/ask" element={<AskQuestionPage />} />
+                      <Route path="/questions/:id" element={<QuestionDetailPage />} />
                   </Routes>
               </main>
               <Footer />

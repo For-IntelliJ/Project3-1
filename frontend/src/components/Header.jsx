@@ -53,6 +53,14 @@ function Header() {
                     마이페이지
                   </Link>
                 </li>
+                <li>
+                  <Link
+                      to="/community"
+                      className="text-lg font-bold font-pretendard hover:text-[#3D4EFE] transition-colors duration-200"
+                  >
+                    커뮤니티
+                  </Link>
+                </li>
               </ul>
             </nav>
 
