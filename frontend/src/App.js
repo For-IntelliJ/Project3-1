@@ -15,19 +15,22 @@ import FAQPage from "./pages/FAQPage";
 
 function App() {
   return (
-    <Router>
-      <Header/>
-      <Routes>
-        <Route path="/" element={<Main />} /> {/* 메인페이지 기본 설정*/}
-        <Route path="/login" element={<LogIn />} />{/*로그인페이지*/}
-        <Route path="/join" element={<JoinPage />} /> {/* 홈 페이지는 옵션 */}
-        <Route path="/mypage" element={<MyPage />} /> {/*마이페이지*/}
-        <Route path="/classmaker" element={<ClassMaker />} /> {/* 클래스 생성/등록 페이지*/}
-        <Route path="/faq" element={<FAQPage />} /> {/* FAQ 페이지*/}
-        {/* 필요한 다른 페이지도 여기에 추가 가능 */}
-      </Routes>
-      <Footer/>
-    </Router>
+      <div className="min-h-screen flex flex-col"> {/* 전체 화면 세로 정렬 */}
+          <Router>
+              <Header />
+              <main className="flex-grow"> {/* 여기에 페이지 내용이 들어감 */}
+                  <Routes>
+                      <Route path="/" element={<Main />} />
+                      <Route path="/login" element={<LogIn />} />
+                      <Route path="/join" element={<JoinPage />} />
+                      <Route path="/mypage" element={<MyPage />} />
+                      <Route path="/classmaker" element={<ClassMaker />} />
+                      <Route path="/faq" element={<FAQPage />} />
+                  </Routes>
+              </main>
+              <Footer />
+          </Router>
+      </div>
   );
 }
 

@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
-        <div className="w-full bg-neutral-50 flex flex-col items-center">
-            <div className="w-full max-w-[1920px] h-52 relative flex justify-center px-10 mx-auto">
+        <footer className="w-full bg-neutral-50 flex flex-col items-center mt-auto">
+            <div className="w-full max-w-[1920px] min-h-[13rem] flex justify-center px-10 mx-auto">
 
-            {/* 좌측 영역 */}
+                {/* 좌측 영역 */}
                 <div className="relative w-[285px]">
                     <div className="w-48 absolute top-[48px] text-slate-600 text-3xl font-normal font-['DNF_Bit_Bit_v2']">
                         ITDA 잇다
@@ -21,7 +22,6 @@ const Footer = () => {
                 {/* 중앙 영역 */}
                 <div className="relative w-[580px]">
                     <div className="absolute top-[48px] flex flex-col items-center space-y-3">
-
                         {/* 하단 링크들 */}
                         <div className="flex flex-nowrap space-x-10 text-gray-600 text-xs font-normal font-['Noto_Sans']">
                             <div className="whitespace-nowrap">이용약관</div>
@@ -33,7 +33,6 @@ const Footer = () => {
                                 alt="SNS Icon"
                                 className="w-20 h-5"
                             />
-
                         </div>
 
                         {/* 회사 정보 + 구분선 */}
@@ -53,9 +52,12 @@ const Footer = () => {
 
                 {/* 우측 영역 */}
                 <div className="relative w-[200px]">
-                    <div className="absolute top-[48px] text-gray-700 text-xl font-bold font-['Noto_Sans']">
+                    <Link
+                        to="/faq"
+                        className="absolute top-[48px] text-gray-700 text-xl font-bold font-['Noto_Sans'] hover:text-[#3D4EFE] transition-colors duration-200"
+                    >
                         고객센터 &gt;
-                    </div>
+                    </Link>
                     <div className="absolute top-[88px] w-44 h-9 rounded-[5px] border border-gray-700" />
                     <div className="absolute top-[96px] w-44 text-gray-700 text-sm font-normal font-['Noto_Sans'] text-center">
                         1:1 문의하기
@@ -66,8 +68,9 @@ const Footer = () => {
                         점심 시간 : 12:00 ~ 13:30
                     </div>
                 </div>
+
             </div>
-        </div>
+        </footer>
     );
 };
 
