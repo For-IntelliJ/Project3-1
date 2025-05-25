@@ -34,7 +34,7 @@ const dummyData = [
     }
 ];
 
-function CommunityPage() {
+function CommunityQuestionPage() {
     const [keyword, setKeyword] = useState("");
     const [sort, setSort] = useState("recent");
     const [selectedTag, setSelectedTag] = useState(null);
@@ -55,16 +55,7 @@ function CommunityPage() {
 
     return (
         <div className="w-full max-w-4xl mx-auto py-10 px-4">
-            <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold">커뮤니티 질문</h1>
-                <button
-                    onClick={() => navigate("/ask")}
-                    className="bg-[#3D4EFE] text-white px-4 py-2 rounded-md font-semibold hover:bg-[#2c3ed9]"
-                >
-                    질문하기
-                </button>
-            </div>
-
+            <h1 className="text-2xl font-bold mb-6">질문/답변</h1>
             {/* 검색/정렬/필터 */}
             <div className="flex flex-wrap gap-4 items-center mb-6">
                 <SearchBar keyword={keyword} onChange={setKeyword} />
@@ -84,4 +75,4 @@ function CommunityPage() {
     );
 }
 
-export default CommunityPage;
+export default CommunityQuestionPage;

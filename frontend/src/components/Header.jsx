@@ -55,11 +55,12 @@ function Header() {
                 </li>
                 <li>
                   <Link
-                      to="/community"
-                      className="text-lg font-bold font-pretendard hover:text-[#3D4EFE] transition-colors duration-200"
+                      to="/community?tab=questions"
+                      className="text-lg font-bold font-pretendard hover:text-[#3D4EFE]"
                   >
                     커뮤니티
                   </Link>
+
                 </li>
               </ul>
             </nav>
