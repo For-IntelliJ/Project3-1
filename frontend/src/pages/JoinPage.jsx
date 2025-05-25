@@ -29,7 +29,7 @@ const JoinPage = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:8080/api/users/login", formData, {
+      await axios.post("http://localhost:8080/api/users/register", formData, {
         withCredentials: true
       });
       console.log("회원가입 성공");
