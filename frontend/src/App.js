@@ -10,6 +10,7 @@ import Main from "./pages/Main";
 import MyPage from "./pages/MyPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import FAQPage from "./pages/FAQPage";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/join" element={<JoinPage />} /> {/* 홈 페이지는 옵션 */}
         <Route path="/mypage" element={<MyPage />} /> {/*마이페이지*/}
         <Route path="/classmaker" element={<ClassMaker />} /> {/* 클래스 생성/등록 페이지*/}
+        <Route path="/faq" element={<FAQPage />} /> {/* FAQ 페이지*/}
         {/* 필요한 다른 페이지도 여기에 추가 가능 */}
       </Routes>
       <Footer/>
