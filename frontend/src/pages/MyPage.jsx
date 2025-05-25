@@ -70,11 +70,21 @@ const MyPage = () => {
                             프로필 수정하기
                         </button>
 
+                        <button
+                            type="button"
+                            onClick={() => document.getElementById("profile-upload").click()}
+                            className="w-[220px] h-[40px] mt-2 border border-gray-800 text-gray-700 rounded-md font-bold hover:bg-gray-100 transition"
+                        >
+                            이미지 선택하기
+                        </button>
+
+                        {/* 숨겨진 실제 input */}
                         <input
+                            id="profile-upload"
                             type="file"
                             accept="image/*"
                             onChange={handleFileChange}
-                            className="border border-gray-300 rounded-md"
+                            className="hidden"
                         />
                     </div>
 
