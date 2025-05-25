@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
-        <footer className="w-full bg-neutral-50 flex flex-col items-center mt-auto">
+        <footer className="w-full bg-neutral-50 flex flex-col items-center mt-20">
             <div className="w-full max-w-[1920px] min-h-[13rem] flex justify-center px-10 mx-auto">
 
                 {/* 좌측 영역 */}
@@ -11,10 +11,10 @@ const Footer = () => {
                     <div className="w-48 absolute top-[48px] text-slate-600 text-3xl font-normal font-['DNF_Bit_Bit_v2']">
                         ITDA 잇다
                     </div>
-                    <div className="w-72 absolute top-[113px] text-gray-700 text-xs font-normal font-['Noto_Sans']">
+                    <div className="w-72 absolute top-[113px] font-pretender text-xs font-normal font-['Noto_Sans']">
                         일상에 쉼을, 재능에 가치를, 사람에 철학을 잇다
                     </div>
-                    <div className="w-56 absolute top-[147px] text-gray-700 text-xs font-normal font-['Noto_Sans']">
+                    <div className="w-56 absolute top-[147px] font-pretender text-xs font-normal font-['Noto_Sans']">
                         Let’s make more chance with ITDA
                     </div>
                 </div>
@@ -54,15 +54,15 @@ const Footer = () => {
                 <div className="relative w-[200px]">
                     <Link
                         to="/faq"
-                        className="absolute top-[48px] text-gray-700 text-xl font-bold font-['Noto_Sans'] hover:text-[#3D4EFE] transition-colors duration-200"
+                        className="absolute top-[48px] font-pretender text-xl font-bold font-['Noto_Sans'] hover:text-[#3D4EFE] transition-colors duration-200"
                     >
                         고객센터 &gt;
                     </Link>
                     <div className="absolute top-[88px] w-44 h-9 rounded-[5px] border border-gray-700" />
-                    <div className="absolute top-[96px] w-44 text-gray-700 text-sm font-normal font-['Noto_Sans'] text-center">
+                    <div className="absolute top-[96px] w-44 font-pretender text-sm font-normal font-['Noto_Sans'] text-center">
                         1:1 문의하기
                     </div>
-                    <div className="absolute top-[133px] w-44 h-7 text-gray-700 text-[10px] font-normal font-['Noto_Sans'] leading-snug">
+                    <div className="absolute top-[133px] w-44 h-7 font-pretender text-[10px] font-normal font-['Noto_Sans'] leading-snug">
                         평일 : 10:00 ~ 20:00 (주말, 공휴일 제외)
                         <br />
                         점심 시간 : 12:00 ~ 13:30
