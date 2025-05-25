@@ -42,7 +42,9 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-// ✅ 프론트엔드 자동 실행 (yarn.cmd 절대경로 명시)
+///////////////////////////////////////
+// ✅ 프론트엔드 자동 실행 (비동기 실행)
+///////////////////////////////////////
 tasks.register('startFrontend', Exec) {
 	workingDir = file('../frontend')
 
@@ -50,18 +52,13 @@ tasks.register('startFrontend', Exec) {
 	def yarnCmd = "${userHome}\\AppData\\Roaming\\npm\\yarn.cmd"
 
 	if (System.properties['os.name'].toLowerCase().contains('windows')) {
-		// Windows: 새 창 없이 yarn 직접 실행 (대기 방지)
+		// Windows: 백그라운드에서 실행
 		commandLine 'cmd', '/c', 'start', '', yarnCmd, 'start'
 	} else {
 		// macOS/Linux: 백그라운드 실행
 		commandLine 'sh', '-c', 'yarn start &'
 	}
 
-	// 실행 결과 무시 (무한 대기 방지)
+	// yarn 실행 에러가 떠도 무시하고 넘어감
 	ignoreExitValue = true
-}
-
-
-tasks.named('bootRun') {
-	dependsOn 'startFrontend'
 }
