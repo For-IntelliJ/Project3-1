@@ -2,13 +2,13 @@
 module.exports = {
   content: [
     './index.html',
-    './src/**/*.{js,ts,jsx,tsx}', // JSX도 포함!
+    './src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
       colors: {
         primary: '#ffffff',
-        hover: '#3D4EFE', //오 우리 기본 색 설정해 뒀구나!
+        hover: '#3D4EFE',
         font: '#37474F',
         line: '#777777',
         warning: '#E44B4B',
@@ -17,8 +17,9 @@ module.exports = {
         errorRed: '#FF3333',
       },
       fontFamily: {
-        sans: ['Noto Sans KR', 'sans-serif'], // 기본 sans 재정의
-        pretendard: ['Pretendard', 'sans-serif'],//프리텐다드 글쏠 추가
+        sans: ['Noto Sans KR', 'sans-serif'],
+        pretendard: ['Pretendard', 'sans-serif'],
+        dnf: ['DNFBitBitv2', 'sans-serif'], // ✅ 여기에 추가!
       },
     },
   },
