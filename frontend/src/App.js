@@ -14,6 +14,7 @@ import CommunityLayout from "./pages/CommunityLayout";
 import AskQuestionPage from "./pages/AskQuestionPage";
 import FreeBoardWritePage from "./pages/FreeBoardWritePage";
 import QuestionDetailPage from "./pages/QuestionDetailPage";
+import MyPageLayout from "./pages/MyPageLayout";
 
 // 공통 컴포넌트
 import Header from "./components/Header";
