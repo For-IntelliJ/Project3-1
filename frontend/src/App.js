@@ -18,7 +18,6 @@ import QuestionDetailPage from "./pages/QuestionDetailPage";
 // 공통 컴포넌트
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import FreeBoardDetailPage from "./pages/FreeBoardDetailPage";
 
 function App() {
     return (
@@ -43,7 +42,6 @@ function App() {
 
                         {/* 질문 상세 페이지 */}
                         <Route path="/questions/:id" element={<QuestionDetailPage />} />
-                        <Route path="/free/:id" element={<FreeBoardDetailPage />} />
                     </Routes>
                 </main>
                 <Footer />
