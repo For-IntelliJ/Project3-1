@@ -8,7 +8,7 @@ const Footer = () => {
 
                 {/* 좌측 영역 */}
                 <div className="relative w-[285px]">
-                    <div className="w-48 absolute top-[48px] text-slate-600 text-3xl font-normal font-['DNF_Bit_Bit_v2']">
+                    <div className="w-48 absolute top-[48px] text-slate-600 text-3xl font-normal font-dnf">
                         ITDA 잇다
                     </div>
                     <div className="w-72 absolute top-[113px] font-pretender text-xs font-normal font-['Noto_Sans']">
