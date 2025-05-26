@@ -1,32 +1,53 @@
-// import {useEffect, useState} from 'react';
-// import axios from 'axios';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// App.js
 
 import React from "react";
-import JoinPage from "./pages/JoinPage";
-import ClassMaker from "./pages/ClassMaker";
-import LogIn from "./pages/LogIn";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// 페이지 컴포넌트
 import Main from "./pages/Main";
+import LogIn from "./pages/LogIn";
+import JoinPage from "./pages/JoinPage";
 import MyPage from "./pages/MyPage";
+import ClassMaker from "./pages/ClassMaker";
+import FAQPage from "./pages/FAQPage";
+import CommunityLayout from "./pages/CommunityLayout";
+import AskQuestionPage from "./pages/AskQuestionPage";
+import FreeBoardWritePage from "./pages/FreeBoardWritePage";
+import QuestionDetailPage from "./pages/QuestionDetailPage";
+
+// 공통 컴포넌트
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-
 function App() {
-  return (
-    <Router>
-      <Header/>
-      <Routes>
-        <Route path="/" element={<Main />} /> {/* 메인페이지 기본 설정*/}
-        <Route path="/login" element={<LogIn />} />{/*로그인페이지*/}
-        <Route path="/join" element={<JoinPage />} /> {/* 홈 페이지는 옵션 */}
-        <Route path="/mypage" element={<MyPage />} /> {/*마이페이지*/}
-        <Route path="/classmaker" element={<ClassMaker />} /> {/* 클래스 생성/등록 페이지*/}
-        {/* 필요한 다른 페이지도 여기에 추가 가능 */}
-      </Routes>
-      <Footer/>
-    </Router>
-  );
+    return (
+        <div className="min-h-screen flex flex-col">
+            <Router>
+                <Header />
+                <main className="flex-grow">
+                    <Routes>
+                        <Route path="/" element={<Main />} />
+                        <Route path="/login" element={<LogIn />} />
+                        <Route path="/join" element={<JoinPage />} />
+                        <Route path="/mypage" element={<MyPage />} />
+                        <Route path="/classmaker" element={<ClassMaker />} />
+                        <Route path="/faq" element={<FAQPage />} />
+
+                        {/* 커뮤니티 메인 (탭 포함) */}
+                        <Route path="/community" element={<CommunityLayout />} />
+
+                        {/* 글쓰기 경로들 */}
+                        <Route path="/ask/write" element={<AskQuestionPage />} />
+                        <Route path="/free/write" element={<FreeBoardWritePage />} />
+
+                        {/* 질문 상세 페이지 */}
+                        <Route path="/questions/:id" element={<QuestionDetailPage />} />
+                    </Routes>
+                </main>
+                <Footer />
+            </Router>
+        </div>
+    );
 }
 
 export default App;

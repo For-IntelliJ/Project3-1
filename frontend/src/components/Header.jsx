@@ -40,7 +40,7 @@ function Header() {
                 <li>
                   <a
                       href="#search"
-                      className="text-lg font-bold font-pretendard hover:underline hover:text-[#3D4EFE] transition-colors duration-200"
+                      className="text-lg font-bold font-pretendard  hover:text-[#3D4EFE] transition-colors duration-200"
                   >
                     클래스검색
                   </a>
@@ -48,10 +48,19 @@ function Header() {
                 <li>
                   <Link
                       to="/mypage"
-                      className="text-lg font-bold font-pretendard hover:underline hover:text-[#3D4EFE] transition-colors duration-200"
+                      className="text-lg font-bold font-pretendard hover:text-[#3D4EFE] transition-colors duration-200"
                   >
                     마이페이지
                   </Link>
+                </li>
+                <li>
+                  <Link
+                      to="/community?tab=questions"
+                      className="text-lg font-bold font-pretendard hover:text-[#3D4EFE]"
+                  >
+                    커뮤니티
+                  </Link>
+
                 </li>
               </ul>
             </nav>
