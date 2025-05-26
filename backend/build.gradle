@@ -64,3 +64,26 @@ tasks.register('startFrontend', Exec) {
 	// yarn 실행 에러가 떠도 무시하고 넘어감
 	ignoreExitValue = true
 }
+
+// build.gradle (혹은 build.gradle.kts)
+tasks.named("bootRun") {
+	// 기존 dependsOn 제거(필요하다면)
+	// dependsOn("startFrontend")
+
+	doFirst {
+		println "▶ Starting frontend in background…"
+		Thread.start {
+			exec {
+				workingDir = file("../frontend")
+				// Windows / macOS 공통으로 yarn start
+				if (System.properties['os.name'].toLowerCase().contains("windows")) {
+					def userHome = System.getProperty("user.home")
+					def yarnCmd = "${userHome}\\AppData\\Roaming\\npm\\yarn.cmd"
+					commandLine "cmd", "/c", "start", "", yarnCmd, "start"
+				} else {
+					commandLine "sh", "-c", "yarn start &"
+				}
+			}
+		}
+	}
+}
