@@ -1,15 +1,25 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import PostForm from "../components/PostForm";
+import { dummyFreePosts } from "../constants/dummyFreePosts";
 
 function FreeBoardWritePage() {
     const navigate = useNavigate();
 
     const handleSubmit = (data) => {
-        console.log("자유게시판 글 등록됨:", data);
-        alert("글이 등록되었습니다!");
-        navigate("/community?tab=free");
+        const newPost = {
+            id: dummyFreePosts.length + 1,
+            ...data,
+            date: new Date().toISOString().slice(0, 10).replace(/-/g, "."),
+            views: 0,
+            likeCount: 0,
+            commentCount: 0,
+        };
+
+        dummyFreePosts.unshift(newPost);
+        navigate(`/free/${newPost.id}`);
     };
+
 
     return (
         <div className="max-w-3xl mx-auto py-10 px-4">
