@@ -13,7 +13,7 @@ function Header() {
               {/* 좌측: 로고 + 텍스트 */}
               <div className="flex items-center space-x-5">
                 <img src="/img/MainLogo.png" alt="Main Logo" className="h-10"/>
-                <Link to="/" className="text-2xl font-bold font-pretendard">
+                <Link to="/" className="text-3xl  font-dnf">
                   잇다
                 </Link>
               </div>

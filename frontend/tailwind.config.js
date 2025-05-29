@@ -19,6 +19,7 @@ module.exports = {
       fontFamily: {
         sans: ['Noto Sans KR', 'sans-serif'], // 기본 sans 재정의
         pretendard: ['Pretendard', 'sans-serif'],//프리텐다드 글쏠 추가
+        dnf: ['DNFBitBitv2', 'sans-serif'],
       },
     },
   },
