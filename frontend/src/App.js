@@ -30,7 +30,7 @@ function App() {
                         <Route path="/" element={<Main />} />
                         <Route path="/login" element={<LogIn />} />
                         <Route path="/join" element={<JoinPage />} />
-                        <Route path="/mypage" element={<MyPage />} />
+                        <Route path="/mypageLayout" element={<MyPageLayout />} />
                         <Route path="/classmaker" element={<ClassMaker />} />
                         <Route path="/faq" element={<FAQPage />} />
 

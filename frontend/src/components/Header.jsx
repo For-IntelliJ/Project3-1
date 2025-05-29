@@ -47,7 +47,7 @@ function Header() {
                 </li>
                 <li>
                   <Link
-                      to="/mypage"
+                      to="/mypageLayout"
                       className="text-lg font-bold font-pretendard hover:text-[#3D4EFE] transition-colors duration-200"
                   >
                     마이페이지
