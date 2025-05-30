@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
-
+import EditProfileModal from "../components/EditProfileModal";
 //출석현황, 커뮤니티 활동 우측 탭
 const TABS = {
     STATISTICS: 'statistics',
@@ -12,6 +12,7 @@ function ProfileSet() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState(null);
     const [activeTab, setActiveTab] = useState(TABS.STATISTICS);
+    const [isModalOpen, setIsModalOpen] = useState(false); //모달상수
 
     const handleFileChange = (e) => { //파일업로드 핸들러
         const file = e.target.files[0];
@@ -63,18 +64,22 @@ function ProfileSet() {
                         <h2 className="text-xl font-bold mt-4 mb-4 pl-24">잇다</h2>
 
                         <button
-                            onClick={handleUpload}
-                            className="w-[220px] h-[100px] pt-9 mb-4 pb-8 border border-[#3D4EFE] text-[#3D4EFE] font-bold rounded-md transition duration-300 hover:bg-[#3D4EFE] hover:text-white hover:border-white"
+                            className="w-[220px] h-[100px] pt-9 mb-4 pb-8 border border-[#3D4EFE] text-[#3D4EFE] font-bold rounded-md transition duration-300 "
                         >
                             오늘의 다짐 작성하기
                         </button>
 
                         <button
-                            onClick={handleUpload}
+                            onClick={() => setIsModalOpen(true)}
                             className="w-[220px] h-[40px] border border-gray-800 text-gray-800 rounded-md font-bold transition duration-300 hover:bg-gray-800 hover:text-white hover:border-white"
                         >
                             프로필 수정하기
                         </button>
+
+                        {/* 모달 */}
+                        {isModalOpen && (
+                            <EditProfileModal onClose={() => setIsModalOpen(false)} />
+                        )}
 
                         <button
                             type="button"
