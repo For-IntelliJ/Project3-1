@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ChagePassword from "./ChagePassword";
 import AccountQuit from "./AccountQuit";
 import ProfileSet from "./ProfileSet";
+import EditProfile from "./EditProfile";
 
 //탭 기본구성
 const tabs = [
@@ -32,7 +33,7 @@ function MyPageLayout() {
                             key={tab.key}
                             onClick={() => navigate(`/mypagelayout?tab=${tab.key}`)}
                             className={`cursor-pointer px-3 py-2 rounded ${
-                                selectedTab === tab.key
+                                selectedTab === tab.key || (tab.key === "profileset" && selectedTab === "editpage")
                                     ? "bg-gray-100 font-semibold text-[#3D4EFE]"
                                     : "text-gray-600 hover:text-[#3D4EFE]"
                             }`}
@@ -41,6 +42,7 @@ function MyPageLayout() {
                         </li>
                     ))}
                 </ul>
+
             </div>
 
             {/* 우측 콘텐츠 영역 */}
@@ -48,6 +50,7 @@ function MyPageLayout() {
                 {selectedTab === "profileset" && <ProfileSet />}
                 {selectedTab === "changepassword" && <ChagePassword />}
                 {selectedTab === "accountquit" && <AccountQuit />}
+                {selectedTab === "editpage" && <EditProfile/>}
             </div>
         </div>
     );
