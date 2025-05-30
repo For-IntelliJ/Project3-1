@@ -14,6 +14,7 @@ import AskQuestionPage from "./pages/AskQuestionPage";
 import FreeBoardWritePage from "./pages/FreeBoardWritePage";
 import QuestionDetailPage from "./pages/QuestionDetailPage";
 import MyPageLayout from "./pages/MyPageLayout";
+import EditProfile from "./pages/EditProfile";
 
 // 공통 컴포넌트
 import Header from "./components/Header";
@@ -32,6 +33,8 @@ function App() {
 
                         {/*마이페이지 메인(탭포합)*/}
                         <Route path="/mypagelayout" element={<MyPageLayout />} />
+                        {/*마이페이지/프로필설정/프로필수정*/}
+                        <Route path="/editpage" element={<EditProfile />} />
 
                         <Route path="/classmaker" element={<ClassMaker />} />
                         <Route path="/faq" element={<FAQPage />} />
