@@ -1,41 +1,22 @@
 import React, {useState} from "react";
-import axios from "axios";
-import EditProfileModal from "../components/EditProfileModal";
+import { useNavigate } from "react-router-dom"
 //출석현황, 커뮤니티 활동 우측 탭
 const TABS = {
     STATISTICS: 'statistics',
     COMMUNITY: 'community',
 };
 
-function ProfileSet() {
 
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [previewUrl, setPreviewUrl] = useState(null);
+function ProfileSet() {
+    const [previewUrl, setPreviewUrl] = useState(null);//미리보기 화면담는 변수
     const [activeTab, setActiveTab] = useState(TABS.STATISTICS);
     const [isModalOpen, setIsModalOpen] = useState(false); //모달상수
+    //네비게이션함수(프로필수정 -> EditPage뜨게) 반드시 함수 안에서 호출되어야 하는구나...
+    const navigate = useNavigate();
 
-    const handleFileChange = (e) => { //파일업로드 핸들러
-        const file = e.target.files[0];
-        if (file) {
-            setSelectedFile(file);
-            setPreviewUrl(URL.createObjectURL(file));
-        }
-    };
-
-    const handleUpload = async () => {
-        if (!selectedFile) return;
-
-        const formData = new FormData();
-        formData.append('file', selectedFile);
-
-        try {
-            const response = await axios.post('http://localhost:8080/api/upload', formData, {
-                headers: { 'Content-Type': 'multipart/form-data' },
-            });
-            alert('업로드 성공: ' + response.data.imageUrl);
-        } catch (err) {
-            console.error('업로드 실패:', err);
-        }
+    const handleEditClick = () => {
+        console.log("프로필 수정 버튼 클릭됨"); // 여기에 콘솔 로그!
+        navigate("/mypagelayout?tab=editpage");
     };
 
     const TabButton = ({ label, value }) => (
@@ -51,7 +32,7 @@ function ProfileSet() {
 
     return (
         <div className="w-full max-w-4xl mx-auto py-10 px-4">
-            <h1 className="text-2xl font-bold mb-6">프로필설정</h1>
+            <h1 className="text-2xl font-bold">프로필설정</h1>
             <main className="flex-grow overflow-hidden relative">
                 <div className="p-6 max-w-[1000px] mx-auto flex gap-10">
                     {/* 왼쪽 영역 */}
@@ -70,36 +51,18 @@ function ProfileSet() {
                         </button>
 
                         <button
-                            onClick={() => setIsModalOpen(true)}
-                            className="w-[220px] h-[40px] border border-gray-800 text-gray-800 rounded-md font-bold transition duration-300 hover:bg-gray-800 hover:text-white hover:border-white"
+                            onClick={handleEditClick}
+                            className="w-[220px] h-[40px] border border-gray-800 text-gray-800 rounded-md font-bold hover:bg-gray-800 hover:text-white"
                         >
                             프로필 수정하기
                         </button>
 
-                        {/* 모달 */}
-                        {isModalOpen && (
-                            <EditProfileModal onClose={() => setIsModalOpen(false)} />
-                        )}
 
-                        <button
-                            type="button"
-                            onClick={() => document.getElementById("profile-upload").click()}
-                            className="w-[220px] h-[40px] mt-2 border border-gray-800 text-gray-700 rounded-md font-bold hover:bg-gray-100 transition"
-                        >
-                            이미지 선택하기
-                        </button>
 
-                        <input
-                            id="profile-upload"
-                            type="file"
-                            accept="image/*"
-                            onChange={handleFileChange}
-                            className="hidden"
-                        />
                     </aside>
 
                     {/* 오른쪽 영역 */}
-                    <section className="w-2/3 flex flex-col gap-6 mt-10">
+                    <section className="w-2/3 flex flex-col gap-6 mt-10 ml-10">
                         {/* 탭 메뉴 */}
                         <div className="flex gap-4 border-b pb-2">
                             <TabButton label="학습 통계" value={TABS.STATISTICS} />
@@ -109,17 +72,17 @@ function ProfileSet() {
                         {/* 탭 내용 */}
                         {activeTab === TABS.STATISTICS ? (
                             <div className="flex gap-4">
-                                <div className="w-[500px] h-[435px] border-2 border-gray-400 rounded-lg p-4">
+                                <div className="w-[500px] h-[388px] border-2 border-gray-400 rounded-lg p-4">
                                     <h3 className="text-lg font-semibold text-gray-700">출석</h3>
                                     <p className="text-sm text-gray-600 mt-2">여기에 원하는 내용을 넣을 수 있어요.</p>
                                 </div>
-                                <div className="w-[400px] h-[435px] border-2 border-gray-400 rounded-lg p-4">
+                                <div className="w-[400px] h-[388px] border-2 border-gray-400 rounded-lg p-4">
                                     <h3 className="text-lg font-semibold text-gray-700">누적 출석 현황</h3>
                                     <p className="text-sm text-gray-600 mt-2">또 다른 내용도 이곳에 넣을 수 있어요.</p>
                                 </div>
                             </div>
                         ) : (
-                            <div className="w-[700px] h-[435px] border-2 border-gray-400 rounded-lg p-4">
+                            <div className="w-[700px] h-[388px] border-2 border-gray-400 rounded-lg p-4">
                                 <h3 className="text-lg font-semibold text-gray-700">커뮤니티 활동 내역</h3>
                                 <p className="text-sm text-gray-600 mt-2">게시글, 댓글, 좋아요 등을 보여줄 수 있어요.</p>
                             </div>
