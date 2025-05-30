@@ -46,8 +46,8 @@ function Header() {
                   </a>
                 </li>
                 <li>
-                  <Link
-                      to="/mypageLayout"
+                  <Link //마이페이지 첫화면을 프로필설정으로 경로설정
+                      to="/mypagelayout?tab=profileset"
                       className="text-lg font-bold font-pretendard hover:text-[#3D4EFE] transition-colors duration-200"
                   >
                     마이페이지
