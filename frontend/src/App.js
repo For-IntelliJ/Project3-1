@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Main from "./pages/Main";
 import LogIn from "./pages/LogIn";
 import JoinPage from "./pages/JoinPage";
-import MyPage from "./pages/MyPage";
 import ClassMaker from "./pages/ClassMaker";
 import FAQPage from "./pages/FAQPage";
 import CommunityLayout from "./pages/CommunityLayout";
@@ -30,7 +29,10 @@ function App() {
                         <Route path="/" element={<Main />} />
                         <Route path="/login" element={<LogIn />} />
                         <Route path="/join" element={<JoinPage />} />
-                        <Route path="/mypageLayout" element={<MyPageLayout />} />
+
+                        {/*마이페이지 메인(탭포합)*/}
+                        <Route path="/mypagelayout" element={<MyPageLayout />} />
+
                         <Route path="/classmaker" element={<ClassMaker />} />
                         <Route path="/faq" element={<FAQPage />} />
 
