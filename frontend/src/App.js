@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Main from "./pages/Main";
 import LogIn from "./pages/LogIn";
 import JoinPage from "./pages/JoinPage";
-import MyPage from "./pages/MyPage";
 import ClassMaker from "./pages/ClassMaker";
 import FAQPage from "./pages/FAQPage";
 import CommunityLayout from "./pages/CommunityLayout";
@@ -16,6 +15,7 @@ import FreeBoardWritePage from "./pages/FreeBoardWritePage";
 import QuestionDetailPage from "./pages/QuestionDetailPage";
 import ClassDetail from "./pages/ClassDetail"; // 이미 import 되어 있음
 import MyPageLayout from "./pages/MyPageLayout";
+import EditProfile from "./pages/EditProfile";
 
 // 공통 컴포넌트
 import Header from "./components/Header";
@@ -31,7 +31,12 @@ function App() {
                         <Route path="/" element={<Main />} />
                         <Route path="/login" element={<LogIn />} />
                         <Route path="/join" element={<JoinPage />} />
-                        <Route path="/mypage" element={<MyPage />} />
+
+                        {/*마이페이지 메인(탭포합)*/}
+                        <Route path="/mypagelayout" element={<MyPageLayout />} />
+                        {/*마이페이지/프로필설정/프로필수정*/}
+                        <Route path="/editpage" element={<EditProfile />} />
+
                         <Route path="/classmaker" element={<ClassMaker />} />
                         <Route path="/faq" element={<FAQPage />} />
 
