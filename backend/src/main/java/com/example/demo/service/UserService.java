@@ -4,6 +4,7 @@ import com.example.demo.domain.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -20,7 +21,14 @@ public class UserService extends GenericService<User> {
      */
     public UserService(UserRepository userRepository) {
         super(userRepository); // GenericService<T>에 userRepository를 전달
-        this.userRepository = userRepository; // 따로 저장
+        this.userRepository = userRepository;
+    }
+
+    /**
+     * 전체 사용자 조회
+     */
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
     }
 
     /**

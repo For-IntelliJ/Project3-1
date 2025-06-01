@@ -14,6 +14,7 @@ import CommunityLayout from "./pages/CommunityLayout";
 import AskQuestionPage from "./pages/AskQuestionPage";
 import FreeBoardWritePage from "./pages/FreeBoardWritePage";
 import QuestionDetailPage from "./pages/QuestionDetailPage";
+import ClassDetail from "./pages/ClassDetail"; // 이미 import 되어 있음
 import MyPageLayout from "./pages/MyPageLayout";
 
 // 공통 컴포넌트
@@ -43,6 +44,9 @@ function App() {
 
                         {/* 질문 상세 페이지 */}
                         <Route path="/questions/:id" element={<QuestionDetailPage />} />
+
+                        +                       {/* 클래스 상세 페이지 */}
+                        +                       <Route path="/class/:id" element={<ClassDetail />} />
                     </Routes>
                 </main>
                 <Footer />
