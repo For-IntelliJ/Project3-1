@@ -1,22 +1,37 @@
-import React, {useState} from "react";
+import React, { useState, useRef } from "react";
 
 function EditProfile() {
-    const [previewUrl, setPreviewUrl] = useState(null);//미리보기 화면담는 변수
+    const [previewUrl, setPreviewUrl] = useState(null); // 미리보기 화면 담는 변수
+    const fileInputRef = useRef(null); // 숨겨진 파일 input 참조용
 
-    //각 요소를 리스트에 담기
+    const handleUploadClick = () => {
+        fileInputRef.current?.click(); // 버튼 클릭 시 input 클릭
+    };
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreviewUrl(reader.result); // 이미지 미리보기
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const profileItems = [
         { label: "이름: ", key: "name" },
         { label: "이메일: ", key: "email" },
         { label: "소개: ", key: "bio" },
         { label: "전화번호: ", key: "phone" },
     ];
-    
-    const profileItems2 =[
+
+    const profileItems2 = [
         { label: "링크추가 ", key: "addlink" },
         { label: "LinkedIn URL", key: "linkedin" },
         { label: "GitHub URL ", key: "github" },
         { label: "개인 웹사이트 URL ", key: "personalweb" },
-        { label: "개인 웹사이트 이름", key:"personalwebname"},
+        { label: "개인 웹사이트 이름", key: "personalwebname" },
     ];
 
     return (
@@ -28,12 +43,28 @@ function EditProfile() {
                         <img
                             src={previewUrl || "/img/Basic_Profile.png"}
                             alt="미리보기"
-                            className="w-[180px] rounded-full bg-gray-200 object-cover mr-10"
+                            className="w-[180px] h-[180px] rounded-full bg-gray-200 object-cover mr-10"
                         />
-                        <button className="border border-gray-800 w-[120px] h-[45px] rounded-lg mt-16 hover:text-white hover:bg-[#3D4EFE]">사진 업로드</button>
-
+                        <div>
+                            <button
+                                type="button"
+                                onClick={handleUploadClick}
+                                className="border border-gray-800 w-[120px] h-[45px] rounded-lg mt-16 hover:text-white hover:bg-[#3D4EFE]"
+                            >
+                                사진 업로드
+                            </button>
+                            {/* 숨겨진 input */}
+                            <input
+                                type="file"
+                                accept="image/*"
+                                ref={fileInputRef}
+                                onChange={handleFileChange}
+                                className="hidden"
+                            />
+                        </div>
                     </div>
-                    {/*map함수 사용으로 간단한 ui처리*/}
+
+                    {/* 기본 정보 입력 필드 */}
                     <div className="space-y-2.5">
                         {profileItems.map((item) => (
                             <div
@@ -58,66 +89,42 @@ function EditProfile() {
                         ))}
                     </div>
 
-
-
+                    {/* 링크 입력 필드 */}
                     <div className="mt-10 space-y-2.5">
-                        {/* 링크추가는 border-b만 */}
-                        <div className="border-b border-black pb-2">
-                            링크추가
-                        </div>
-
-                        {/* 링크추가 제외한 나머지 */}
+                        <div className="border-b border-black pb-2">링크추가</div>
                         <div className="space-y-2.5">
                             {profileItems2
                                 .filter(item => item.key !== "addlink")
                                 .map((item) => {
-                                    // 개인 웹사이트 URL, 이름은 한 줄 flex로 묶기 위해 따로 처리
                                     if (item.key === "personalweb") {
                                         return (
                                             <div key="personalweb-group" className="flex gap-2">
                                                 <div className="border border-black rounded-lg p-2 flex-1 flex flex-col">
                                                     <label className="font-semibold mb-1">개인 웹사이트 URL</label>
-                                                    <input
-                                                        type="text"
-                                                        className="w-full outline-none bg-transparent"
-                                                    />
+                                                    <input type="text" className="w-full outline-none bg-transparent" />
                                                 </div>
                                                 <div className="border border-black rounded-lg p-2 flex-1 flex flex-col">
                                                     <label className="font-semibold mb-1">개인 웹사이트 이름</label>
-                                                    <input
-                                                        type="text"
-                                                        className="w-full outline-none bg-transparent"
-                                                    />
+                                                    <input type="text" className="w-full outline-none bg-transparent" />
                                                 </div>
                                             </div>
                                         );
                                     }
-                                    // personalwebname는 위에서 이미 같이 처리했으니 스킵
                                     if (item.key === "personalwebname") return null;
 
-                                    // 그 외 항목들은 border 다 적용하고 label + input 함께 배치
                                     return (
                                         <div
                                             key={item.key}
                                             className="border border-black rounded-lg p-2 flex flex-col"
                                         >
                                             <label className="font-semibold mb-1">{item.label}</label>
-                                            <input
-                                                type="text"
-                                                className="w-full outline-none bg-transparent"
-                                            />
+                                            <input type="text" className="w-full outline-none bg-transparent" />
                                         </div>
                                     );
                                 })}
                         </div>
-
                     </div>
-
-
                 </div>
-
-
-
             </div>
         </div>
     );
