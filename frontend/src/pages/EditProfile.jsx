@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import {useNavigate} from "react-router-dom";
 import EditProfileModal from "../components/EditProfileModal";
 import CancelContentModal from "../components/CancelContentModal";
 
@@ -7,6 +8,7 @@ function EditProfile() {
     const fileInputRef = useRef(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);//이중확인창
+    const navigate = useNavigate();
 
     
     const [profileData, setProfileData] = useState({
@@ -204,6 +206,9 @@ function EditProfile() {
                             <button
                                 type="button"
                                 className="px-4 py-2 bg-[#3D4EFE] text-white rounded"
+                                onClick={() => {
+                                    navigate("/mypagelayout?tab=profileset");
+                                }}
                             >
                                 저장
                             </button>
@@ -214,6 +219,7 @@ function EditProfile() {
                                 onConfirm={confirmCancel} //변수에 기능을 넣은거구나!!
                             />
                         )}
+                        {/*페이지를 이동해야한다 만약 저장버튼을 누른다면 profileSet으로 Navigate*/}
 
                     </div>
                 </div>
