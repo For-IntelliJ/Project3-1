@@ -1,8 +1,10 @@
 import React, { useState, useRef } from "react";
+import EditProfileModal from "../components/EditProfileModal";
 
 function EditProfile() {
-    const [previewUrl, setPreviewUrl] = useState(null); // 미리보기 화면 담는 변수
-    const fileInputRef = useRef(null); // 숨겨진 파일 input 참조용
+    const [previewUrl, setPreviewUrl] = useState(null); // 미리보기 화면 담는 상수
+    const fileInputRef = useRef(null); // PC 파일을 input 담는 상수
+    const [isModalOpen, setIsModalOpen] = useState(false); //미리보기 Modal을 담는 상수
 
     const handleUploadClick = () => {
         fileInputRef.current?.click(); // 버튼 클릭 시 input 클릭
@@ -14,9 +16,15 @@ function EditProfile() {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setPreviewUrl(reader.result); // 이미지 미리보기
+                setIsModalOpen(true); // 모달 열기
             };
             reader.readAsDataURL(file);
         }
+    };
+
+    //모달 닫기 함수
+    const closeModal = () => {
+        setIsModalOpen(false);
     };
 
     const profileItems = [
@@ -61,6 +69,14 @@ function EditProfile() {
                                 onChange={handleFileChange}
                                 className="hidden"
                             />
+
+                            {/* 모달 렌더링 */}
+                            {isModalOpen && (
+                                <EditProfileModal
+                                    onClose={closeModal}
+                                    previewUrl={previewUrl}/>
+
+                            )}
                         </div>
                     </div>
 
