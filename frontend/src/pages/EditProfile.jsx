@@ -30,7 +30,7 @@ function EditProfile() {
     const profileItems = [
         { label: "이름: ", key: "name" },
         { label: "이메일: ", key: "email" },
-        { label: "소개: ", key: "bio" },
+        { label: "오늘의다짐: ", key: "bio" },
         { label: "전화번호: ", key: "phone" },
     ];
 
@@ -143,6 +143,22 @@ function EditProfile() {
                                         </div>
                                     );
                                 })}
+                        </div>
+
+                        {/* 취소 or 저장버튼 */}
+                        <div className="flex justify-end space-x-2 mt-10">
+                            <button
+                                type="button"
+                                className="px-4 py-2 bg-gray-200 rounded"
+                            >
+                                취소
+                            </button>
+                            <button
+                                type="button"
+                                className="px-4 py-2 bg-[#3D4EFE] text-white rounded"
+                            >
+                                저장
+                            </button>
                         </div>
                     </div>
                 </div>
