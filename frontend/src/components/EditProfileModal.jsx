@@ -27,12 +27,12 @@ function EditProfileModal({ onClose, previewUrl }) {
                     <form className="flex flex-col flex-grow">
 
                         {/* 미리보기 이미지 공간 */}
-                        <div className="flex-grow bg-gray-100 rounded mb-4 flex items-center justify-center">
+                        <div className="flex-grow bg-gray-100 rounded mb-4 flex items-center justify-center h-60 overflow-hidden">
                             {previewUrl ? (
                                 <img
                                     src={previewUrl}
                                     alt="미리보기"
-                                    className="max-h-full max-w-full object-contain"
+                                    className="object-contain max-w-full max-h-full"
                                 />
                             ) : (
                                 <span className="text-gray-400">미리보기 이미지 영역</span>
