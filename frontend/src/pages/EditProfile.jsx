@@ -80,7 +80,7 @@ function EditProfile() {
                         </div>
                     </div>
 
-                    {/* 기본 정보 입력 필드 */}
+                    {/*기본정보 입력하는 map함수 활용 -> 고정 필드로 잡아두면 지워지지 않고 input태그는 태그대로 사용 가능!*/}
                     <div className="space-y-2.5">
                         {profileItems.map((item) => (
                             <div
@@ -90,20 +90,25 @@ function EditProfile() {
                                 }`}
                             >
                                 {item.key === "bio" ? (
-                                    <textarea
-                                        defaultValue={item.label}
-                                        className="font-semibold w-full h-full resize-none outline-none bg-transparent"
-                                    />
+                                    <>
+                                        <div className="font-semibold mb-2">{item.label}</div>
+                                        <textarea
+                                            className="w-full h-full resize-none outline-none bg-transparent"
+                                        />
+                                    </>
                                 ) : (
-                                    <input
-                                        type="text"
-                                        defaultValue={item.label}
-                                        className="font-semibold w-full outline-none bg-transparent"
-                                    />
+                                    <div className="flex items-center space-x-2">
+                                        <span className="font-semibold">{item.label}</span>
+                                        <input
+                                            type="text"
+                                            className="flex-1 outline-none bg-transparent"
+                                        />
+                                    </div>
                                 )}
                             </div>
                         ))}
                     </div>
+
 
                     {/* 링크 입력 필드 */}
                     <div className="mt-10 space-y-2.5">
