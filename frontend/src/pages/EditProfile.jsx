@@ -112,7 +112,7 @@ function EditProfile() {
 
                     {/* 링크 입력 필드 */}
                     <div className="mt-10 space-y-2.5">
-                        <div className="border-b border-black pb-2">링크추가</div>
+                        <div className="border-b border-black pb-2 font-bold text-2xl">링크추가</div>
                         <div className="space-y-2.5">
                             {profileItems2
                                 .filter(item => item.key !== "addlink")
