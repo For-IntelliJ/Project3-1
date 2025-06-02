@@ -17,7 +17,7 @@ function CancelContentModal({ onClose,onConfirm }) {
                     <h2 className="text-2xl font-bold mb-4">작성 내용을 취소하시겠습니까?</h2>
                 </div>
 
-                <div className="flex justify-center mt-4">
+                <div className="flex justify-center mt-6">
                     <h3>
                         기존에 작성했던 모든 내용을 삭제합니다.
                     </h3>
