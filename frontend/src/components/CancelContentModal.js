@@ -5,7 +5,7 @@ function CancelContentModal({ onClose,onConfirm }) {
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white p-6 rounded shadow-xl w-full max-w-lg h-[350px] flex flex-col ">
-                <div className="flex justify-center mt-6 mb-6">
+                <div className="flex justify-center mt-8 mb-6">
                     <img
                         src="/img/Warning_icon.png"
                         alt="경고 아이콘"
@@ -21,6 +21,7 @@ function CancelContentModal({ onClose,onConfirm }) {
                     <h3>
                         기존에 작성했던 모든 내용을 삭제합니다.
                     </h3>
+
                 </div>
 
                 <form className="flex flex-col jus flex-grow">
