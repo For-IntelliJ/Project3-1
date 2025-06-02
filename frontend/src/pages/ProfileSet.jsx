@@ -37,15 +37,17 @@ function ProfileSet() {
             <main className="flex-grow overflow-hidden relative">
                 <div className="p-6 max-w-[1000px] mx-auto flex gap-10">
                     {/* 왼쪽 영역 */}
-                    <aside className="flex flex-col items-start gap-1 mt-10">
+                    <aside className="flex flex-col text-center gap-1 mt-10">
                         <img
                             src={previewUrl || "/img/Basic_Profile.png"}
                             alt="미리보기"
                             className="w-[220px] h-[220px] rounded-full bg-gray-200 object-cover"
                         />
-                        <h2 className="text-xl font-bold mt-4 mb-4 pl-24">잇다</h2>
+                        <div className="text-xl font-bold mt-4 mb-4">
+                            <p>{profileData?.name || "잇다"}</p>
+                        </div>
 
-
+                        {/*오늘의 다짐 부분*/}
                         <div className="w-[220px] h-[100px] pt-9 mb-4 pb-8 border border-[#3D4EFE] text-[#3D4EFE] font-bold rounded-md transition du ration-300 text-center">
                             <p>{profileData?.bio || "내용이 없습니다."}</p>
                         </div>
