@@ -10,7 +10,6 @@ const TABS = {
 function ProfileSet() {
     const [previewUrl, setPreviewUrl] = useState(null);//미리보기 화면담는 변수
     const [activeTab, setActiveTab] = useState(TABS.STATISTICS);
-    const [isModalOpen, setIsModalOpen] = useState(false); //모달상수
     //네비게이션함수(프로필수정 -> EditPage뜨게) 반드시 함수 안에서 호출되어야 하는구나...
     const navigate = useNavigate();
 
