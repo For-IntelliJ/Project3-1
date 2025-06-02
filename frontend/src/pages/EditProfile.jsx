@@ -10,6 +10,16 @@ function EditProfile() {
     const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);//이중확인창
     const navigate = useNavigate();
 
+
+    // 사진 업로드 후 저장 눌렀을 때
+    const handleSave = () => {
+        navigate("/mypagelayout?tab=profileset", {
+            state: {
+                profileData,//이부분에는 오늘의 다짐만 불러와야겠군
+                previewUrl,
+            }
+        });
+    };
     
     const [profileData, setProfileData] = useState({
         name: '',
@@ -206,9 +216,7 @@ function EditProfile() {
                             <button
                                 type="button"
                                 className="px-4 py-2 bg-[#3D4EFE] text-white rounded"
-                                onClick={() => {
-                                    navigate("/mypagelayout?tab=profileset");
-                                }}
+                                onClick={handleSave}
                             >
                                 저장
                             </button>
