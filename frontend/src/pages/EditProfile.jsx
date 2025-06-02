@@ -1,13 +1,27 @@
 import React, { useState, useRef } from "react";
 import EditProfileModal from "../components/EditProfileModal";
+import CancelContentModal from "../components/CancelContentModal";
 
 function EditProfile() {
-    const [previewUrl, setPreviewUrl] = useState(null); // 미리보기 화면 담는 상수
-    const fileInputRef = useRef(null); // PC 파일을 input 담는 상수
-    const [isModalOpen, setIsModalOpen] = useState(false); //미리보기 Modal을 담는 상수
+    const [previewUrl, setPreviewUrl] = useState(null);
+    const fileInputRef = useRef(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);//이중확인창
+
+    
+    const [profileData, setProfileData] = useState({
+        name: '',
+        email: '',
+        bio: '',
+        phone: '',
+        linkedin: '',
+        github: '',
+        personalweb: '',
+        personalwebname: ''
+    });
 
     const handleUploadClick = () => {
-        fileInputRef.current?.click(); // 버튼 클릭 시 input 클릭
+        fileInputRef.current?.click();
     };
 
     const handleFileChange = (e) => {
@@ -15,31 +29,62 @@ function EditProfile() {
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                setPreviewUrl(reader.result); // 이미지 미리보기
-                setIsModalOpen(true); // 모달 열기
+                setPreviewUrl(reader.result);
+                setIsModalOpen(true);
             };
             reader.readAsDataURL(file);
         }
     };
 
-    //모달 닫기 함수
-    const closeModal = () => {
-        setIsModalOpen(false);
+    const closeModal = () => setIsModalOpen(false);
+
+    //취소버튼 클릭시 이중확인창 
+    const handleCancel = () => {
+        setIsCancelModalOpen(true);
+    };
+    
+    //이중확인창에서 확인 누르면 그제서야 실제 초기화
+    const confirmCancel = () => {
+        setIsCancelModalOpen(false);
+        setPreviewUrl(null);
+        setProfileData({
+            name: '',
+            email: '',
+            bio: '',
+            phone: '',
+            linkedin: '',
+            github: '',
+            personalweb: '',
+            personalwebname: ''
+        });
+    };
+
+    //이중확인창에서 취소 클릭시 닫히는 함수
+    const closeCancelModal = () => {
+        setIsCancelModalOpen(false);
+    };
+
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setProfileData((prev) => ({
+            ...prev,
+            [name]: value
+        }));
     };
 
     const profileItems = [
-        { label: "이름: ", key: "name" },
-        { label: "이메일: ", key: "email" },
-        { label: "오늘의다짐: ", key: "bio" },
-        { label: "전화번호: ", key: "phone" },
+        { label: "이름", key: "name" },
+        { label: "이메일", key: "email" },
+        { label: "오늘의다짐", key: "bio", textarea: true },
+        { label: "전화번호", key: "phone" }
     ];
 
     const profileItems2 = [
-        { label: "링크추가 ", key: "addlink" },
         { label: "LinkedIn URL", key: "linkedin" },
-        { label: "GitHub URL ", key: "github" },
-        { label: "개인 웹사이트 URL ", key: "personalweb" },
-        { label: "개인 웹사이트 이름", key: "personalwebname" },
+        { label: "GitHub URL", key: "github" },
+        { label: "개인 웹사이트 URL", key: "personalweb" },
+        { label: "개인 웹사이트 이름", key: "personalwebname" }
     ];
 
     return (
@@ -47,6 +92,7 @@ function EditProfile() {
             <h1 className="text-2xl font-bold mb-10">프로필 수정하기</h1>
             <div className="w-[800px] h-full border border-gray-800 rounded-xl">
                 <div className="m-10">
+                    {/* 사진 업로드 */}
                     <div className="flex mb-10">
                         <img
                             src={previewUrl || "/img/Basic_Profile.png"}
@@ -61,7 +107,6 @@ function EditProfile() {
                             >
                                 사진 업로드
                             </button>
-                            {/* 숨겨진 input */}
                             <input
                                 type="file"
                                 accept="image/*"
@@ -69,87 +114,90 @@ function EditProfile() {
                                 onChange={handleFileChange}
                                 className="hidden"
                             />
-
-                            {/* 모달 렌더링 */}
                             {isModalOpen && (
                                 <EditProfileModal
                                     onClose={closeModal}
-                                    previewUrl={previewUrl}/>
-
+                                    previewUrl={previewUrl}
+                                />
                             )}
                         </div>
                     </div>
 
-                    {/*기본정보 입력하는 map함수 활용 -> 고정 필드로 잡아두면 지워지지 않고 input태그는 태그대로 사용 가능!*/}
+                    {/* 기본 정보 */}
                     <div className="space-y-2.5">
-                        {profileItems.map((item) => (
+                        {profileItems.map(({ label, key, textarea }) => (
                             <div
-                                key={item.key}
-                                className={`border border-black rounded-lg p-4 ${
-                                    item.key === "bio" ? "h-[250px]" : ""
-                                }`}
+                                key={key}
+                                className={`border border-black rounded-lg p-4 ${key === "bio" ? "h-[250px]" : "h-[90px]"}`}
                             >
-                                {item.key === "bio" ? (
-                                    <>
-                                        <div className="font-semibold mb-2">{item.label}</div>
-                                        <textarea
-                                            className="w-full h-full resize-none outline-none bg-transparent"
-                                        />
-                                    </>
+                                <div className="font-semibold mb-2">{label}</div>
+                                {textarea ? (
+                                    <textarea
+                                        name={key}
+                                        value={profileData[key]}
+                                        onChange={handleChange}
+                                        className="w-full h-full resize-none outline-none bg-transparent"
+                                    />
                                 ) : (
-                                    <div className="flex items-center space-x-2">
-                                        <span className="font-semibold">{item.label}</span>
-                                        <input
-                                            type="text"
-                                            className="flex-1 outline-none bg-transparent"
-                                        />
-                                    </div>
+                                    <input
+                                        type="text"
+                                        name={key}
+                                        value={profileData[key]}
+                                        onChange={handleChange}
+                                        className="w-full outline-none bg-transparent"
+                                    />
                                 )}
                             </div>
                         ))}
                     </div>
 
-
-                    {/* 링크 입력 필드 */}
+                    {/* 링크 */}
                     <div className="mt-10 space-y-2.5">
                         <div className="border-b border-black pb-2 font-bold text-2xl">링크추가</div>
                         <div className="space-y-2.5">
+                            <div className="flex gap-2">
+                                <div className="border border-black rounded-lg p-2 flex-1 flex flex-col">
+                                    <label className="font-semibold mb-1">개인 웹사이트 URL</label>
+                                    <input
+                                        type="text"
+                                        name="personalweb"
+                                        value={profileData.personalweb}
+                                        onChange={handleChange}
+                                        className="w-full outline-none bg-transparent"
+                                    />
+                                </div>
+                                <div className="border border-black rounded-lg p-2 flex-1 flex flex-col">
+                                    <label className="font-semibold mb-1">개인 웹사이트 이름</label>
+                                    <input
+                                        type="text"
+                                        name="personalwebname"
+                                        value={profileData.personalwebname}
+                                        onChange={handleChange}
+                                        className="w-full outline-none bg-transparent"
+                                    />
+                                </div>
+                            </div>
                             {profileItems2
-                                .filter(item => item.key !== "addlink")
-                                .map((item) => {
-                                    if (item.key === "personalweb") {
-                                        return (
-                                            <div key="personalweb-group" className="flex gap-2">
-                                                <div className="border border-black rounded-lg p-2 flex-1 flex flex-col">
-                                                    <label className="font-semibold mb-1">개인 웹사이트 URL</label>
-                                                    <input type="text" className="w-full outline-none bg-transparent" />
-                                                </div>
-                                                <div className="border border-black rounded-lg p-2 flex-1 flex flex-col">
-                                                    <label className="font-semibold mb-1">개인 웹사이트 이름</label>
-                                                    <input type="text" className="w-full outline-none bg-transparent" />
-                                                </div>
-                                            </div>
-                                        );
-                                    }
-                                    if (item.key === "personalwebname") return null;
-
-                                    return (
-                                        <div
-                                            key={item.key}
-                                            className="border border-black rounded-lg p-2 flex flex-col"
-                                        >
-                                            <label className="font-semibold mb-1">{item.label}</label>
-                                            <input type="text" className="w-full outline-none bg-transparent" />
-                                        </div>
-                                    );
-                                })}
+                                .filter(item => !["personalweb", "personalwebname"].includes(item.key))
+                                .map(({ label, key }) => (
+                                    <div key={key} className="border border-black rounded-lg p-2 flex flex-col">
+                                        <label className="font-semibold mb-1">{label}</label>
+                                        <input
+                                            type="text"
+                                            name={key}
+                                            value={profileData[key]}
+                                            onChange={handleChange}
+                                            className="w-full outline-none bg-transparent"
+                                        />
+                                    </div>
+                                ))}
                         </div>
 
-                        {/* 취소 or 저장버튼 */}
                         <div className="flex justify-end space-x-2 mt-10">
                             <button
                                 type="button"
                                 className="px-4 py-2 bg-gray-200 rounded"
+                                onClick={handleCancel}
                             >
                                 취소
                             </button>
@@ -160,6 +208,13 @@ function EditProfile() {
                                 저장
                             </button>
                         </div>
+                        {isCancelModalOpen && (
+                            <CancelContentModal
+                                onClose={closeCancelModal}
+                                onConfirm={confirmCancel} //변수에 기능을 넣은거구나!!
+                            />
+                        )}
+
                     </div>
                 </div>
             </div>
