@@ -13,7 +13,7 @@ import java.util.UUID;
 public class S3Service {
 
     private final S3Client s3Client;
-    private final String BUCKET_NAME = "itda-kangbe-s3";
+    private final String bucketname = "itda-kangbe-s3";
 
     public S3Service(S3Client s3Client) {
         this.s3Client = s3Client;
@@ -23,7 +23,7 @@ public class S3Service {
         String key = "uploads/" + UUID.randomUUID() + "-" + file.getOriginalFilename();
 
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
-                .bucket(BUCKET_NAME)
+                .bucket(bucketname)
                 .key(key)
                 .contentType(file.getContentType())
                 .build();
@@ -31,6 +31,19 @@ public class S3Service {
         s3Client.putObject(putObjectRequest, RequestBody.fromBytes(file.getBytes()));
 
         // S3에 public read 권한이 있는 경우
-        return "https://" + BUCKET_NAME + ".s3.ap-northeast-3.amazonaws.com/" + key;
+        return "https://" + bucketname + ".s3.ap-northeast-3.amazonaws.com/" + key;
+    }
+
+    // 디버깅용 메서드 추가
+    public void testCredentials() {
+        try {
+            s3Client.listBuckets().buckets().forEach(b -> System.out.println(b.name()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public S3Client getS3Client() {
+        return this.s3Client;
     }
 }
