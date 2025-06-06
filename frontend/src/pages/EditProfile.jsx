@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import {useNavigate} from "react-router-dom";
 import EditProfileModal from "../components/EditProfileModal";
 import CancelContentModal from "../components/CancelContentModal";
+import axios from "axios";
 
 function EditProfile() {
     const [previewUrl, setPreviewUrl] = useState(null);
@@ -36,15 +37,36 @@ function EditProfile() {
         fileInputRef.current?.click();
     };
 
+    //파일선택함수
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
+            //미리보기 URL생성
             const reader = new FileReader();
             reader.onloadend = () => {
                 setPreviewUrl(reader.result);
                 setIsModalOpen(true);
             };
             reader.readAsDataURL(file);
+
+            // 파일 서버 전송
+            const formData = new FormData();
+            formData.append("file", file);
+
+            //백엔드 주소(fetch대신 axios 사용)
+            axios.post("http://localhost:8080/api/profile/upload", formData, {
+                withCredentials: true,  // 이 부분 추가
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            })
+                .then(res => {
+                    console.log("업로드 결과:", res.data);
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+
         }
     };
 
