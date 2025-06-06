@@ -41,6 +41,11 @@ public class User {
         M, F
     }
 
+    //프로필 이미지 URL을 담아두는 컬럼
+    @Column(name = "profile_image_url")
+    private String profileImageUrl;
+
+
     // 기본 생성자 (JPA는 반드시 필요함)
     public User() {}
 
