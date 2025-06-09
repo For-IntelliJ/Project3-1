@@ -18,6 +18,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // preflight 허용
                         .requestMatchers("/user/**").permitAll() // 회원가입 등 열어둠
+                        .requestMatchers("/api/profile/upload").permitAll()  // 프로필 수정 열어둠!
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form.disable())
