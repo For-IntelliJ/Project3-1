@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 
-function EditProfileModal({ onClose }) {
+function EditProfileModal({ onClose, previewUrl }) {
 
      useEffect(() => {
         const handleKeyDown = (e) => {
@@ -27,8 +27,16 @@ function EditProfileModal({ onClose }) {
                     <form className="flex flex-col flex-grow">
 
                         {/* 미리보기 이미지 공간 */}
-                        <div className="flex-grow bg-gray-100 rounded mb-4 flex items-center justify-center">
-                            <span className="text-gray-400">미리보기 이미지 영역</span>
+                        <div className="flex-grow bg-gray-100 rounded mb-4 flex items-center justify-center h-60 overflow-hidden">
+                            {previewUrl ? (
+                                <img
+                                    src={previewUrl}
+                                    alt="미리보기"
+                                    className="object-contain max-w-full max-h-full"
+                                />
+                            ) : (
+                                <span className="text-gray-400">미리보기 이미지 영역</span>
+                            )}
                         </div>
 
                         {/* 하단 버튼 */}
@@ -40,7 +48,11 @@ function EditProfileModal({ onClose }) {
                             >
                                 취소
                             </button>
-                            <button className="px-4 py-2 bg-[#3D4EFE] text-white rounded">
+                            <button
+                                type="button"
+                                onClick={onClose}
+                                className="px-4 py-2 bg-[#3D4EFE] text-white rounded"
+                            >
                                 저장
                             </button>
                         </div>

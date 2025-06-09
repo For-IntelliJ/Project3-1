@@ -1,18 +1,19 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom"
+import {useLocation} from "react-router-dom"; //state 받기)
+
 //출석현황, 커뮤니티 활동 우측 탭
 const TABS = {
     STATISTICS: 'statistics',
     COMMUNITY: 'community',
 };
 
-
 function ProfileSet() {
-    const [previewUrl, setPreviewUrl] = useState(null);//미리보기 화면담는 변수
     const [activeTab, setActiveTab] = useState(TABS.STATISTICS);
-    const [isModalOpen, setIsModalOpen] = useState(false); //모달상수
     //네비게이션함수(프로필수정 -> EditPage뜨게) 반드시 함수 안에서 호출되어야 하는구나...
     const navigate = useNavigate();
+    const location = useLocation();
+    const { profileData, previewUrl } = location.state || {};
 
     const handleEditClick = () => {
         console.log("프로필 수정 버튼 클릭됨"); // 여기에 콘솔 로그!
@@ -36,19 +37,20 @@ function ProfileSet() {
             <main className="flex-grow overflow-hidden relative">
                 <div className="p-6 max-w-[1000px] mx-auto flex gap-10">
                     {/* 왼쪽 영역 */}
-                    <aside className="flex flex-col items-start gap-1 mt-10">
+                    <aside className="flex flex-col text-center gap-1 mt-10">
                         <img
                             src={previewUrl || "/img/Basic_Profile.png"}
                             alt="미리보기"
                             className="w-[220px] h-[220px] rounded-full bg-gray-200 object-cover"
                         />
-                        <h2 className="text-xl font-bold mt-4 mb-4 pl-24">잇다</h2>
+                        <div className="text-xl font-bold mt-4 mb-4">
+                            <p>{profileData?.name || "잇다"}</p>
+                        </div>
 
-                        <button
-                            className="w-[220px] h-[100px] pt-9 mb-4 pb-8 border border-[#3D4EFE] text-[#3D4EFE] font-bold rounded-md transition duration-300 "
-                        >
-                            오늘의 다짐 작성하기
-                        </button>
+                        {/*오늘의 다짐 부분*/}
+                        <div className="w-[220px] h-[100px] pt-9 mb-4 pb-8 border border-[#3D4EFE] text-[#3D4EFE] font-bold rounded-md transition du ration-300 text-center">
+                            <p>{profileData?.bio || "내용이 없습니다."}</p>
+                        </div>
 
                         <button
                             onClick={handleEditClick}

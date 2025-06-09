@@ -13,7 +13,7 @@ public class S3Config {
     public S3Client s3Client() {
         return S3Client.builder()
                 .region(Region.AP_NORTHEAST_3) // 오사카리전
-                .credentialsProvider(DefaultCredentialsProvider.create())
+                .credentialsProvider(DefaultCredentialsProvider.create()) // IAM 역할이면 이거면 Ok
                 .build();
     }
 }
