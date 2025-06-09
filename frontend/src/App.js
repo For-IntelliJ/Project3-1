@@ -21,6 +21,7 @@ import EditProfile from "./pages/EditProfile";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
+// 페이지
 function App() {
     return (
         <div className="min-h-screen flex flex-col">

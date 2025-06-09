@@ -25,7 +25,7 @@ dependencies {
 	implementation 'org.mariadb.jdbc:mariadb-java-client:3.2.0'
 	implementation 'io.jsonwebtoken:jjwt:0.9.1' // jwt 토큰 로그인
 	implementation 'org.springframework.boot:spring-boot-starter-security' // 비밀번호 해시
-	implementation 'org.springframework.security:spring-security-crypto'
+	implementation 'org.springframework.security:spring-security-crypto' // 보안 의존성 해제
 
 	// ✅ S3 SDK 의존성 추가!!
 	implementation 'software.amazon.awssdk:s3:2.25.0'

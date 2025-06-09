@@ -25,7 +25,7 @@ public class UserService extends GenericService<User> {
     }
 
     /**
-     * 전체 사용자 조회
+     * 전체 사용자 조회 기능
      */
     public List<User> findAllUsers() {
         return userRepository.findAll();

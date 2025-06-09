@@ -22,7 +22,7 @@ const ClassCard = ({
             </div>
             {/* 카드 하단 정보 */}
             <div className="p-4">
-                {/* 카테고리, 온/오프라인, 난이도 배지 */}
+                {/* 카테고리, 온/오프라인, 난이도 배지 배치 */}
                 <div className="flex flex-wrap gap-2 mb-2">
           <span className="text-xs bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded">
             카테고리: {category}

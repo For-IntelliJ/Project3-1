@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ClassCard from "../components/ClassCard";
 
-// 배너 이미지
+// 배너 이미지 정보
 const banners = ["/img/Benner1.svg", "/img/Benner2.svg"];
 
 // 카테고리 버튼 정보 (메인 화면 상단 메뉴)
