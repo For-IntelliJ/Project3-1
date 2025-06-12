@@ -1,6 +1,7 @@
 // src/pages/ClassDetail.jsx
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
+import ClassApplication from "../components/ClassApplication";
 
 const ClassDetail = () => {
     const { id } = useParams();
@@ -8,6 +9,8 @@ const ClassDetail = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [activeSection, setActiveSection] = useState("intro");
+    const [selectedDate, setSelectedDate] = useState('');
+    const [showApplicationModal, setShowApplicationModal] = useState(false);
     const accentColor = "#3d42fe"; // 퍼스널 컬러
 
     // 섹션별 ref
@@ -48,7 +51,7 @@ const ClassDetail = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // API 호출
+    // 서버 응답 처리
     useEffect(() => {
         async function fetchClass() {
             try {
@@ -73,6 +76,86 @@ const ClassDetail = () => {
         }
         fetchClass();
     }, [id]);
+
+    // 클래스 신청 화면 열기
+    const handleApplicationClick = () => {
+        if (!selectedDate) {
+            alert('날짜를 먼저 선택해주세요.');
+            return;
+        }
+        setShowApplicationModal(true);
+    };
+
+    // 클래스 신청 확인
+    const handleApplicationConfirm = async () => {
+        try {
+            // 신청 데이터 준비
+            const applyData = {
+                classId: id,
+                classname: classData?.classname,
+                mentor: classData?.mentor_name,
+                selectedDate,
+                category: classData?.category_name
+            };
+
+            // 콘솔 로그로 데이터 확인
+            console.log('=== 프론트엔드 신청 데이터 ===');
+            console.log('신청 데이터:', applyData);
+            console.log('Class ID:', id);
+            console.log('선택된 날짜:', selectedDate);
+
+            // API 호출 전 로그
+            console.log('서버로 전송할 데이터:', { classId: id });
+
+            // API 호출
+            const response = await fetch('http://localhost:8080/api/applies', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    classId: id
+                })
+            });
+
+            console.log('HTTP Response Status:', response.status);
+            console.log('HTTP Response OK:', response.ok);
+
+            // 응답 텍스트 확인
+            const responseText = await response.text();
+            console.log('서버 응답 텍스트:', responseText);
+
+            let result;
+            try {
+                result = JSON.parse(responseText);
+            } catch (parseError) {
+                console.error('JSON 파싱 오류:', parseError);
+                console.error('응답 내용:', responseText);
+                alert('서버 응답 형식 오류');
+                return;
+            }
+
+            console.log('=== 서버 응답 ===');
+            console.log('응답 데이터:', result);
+
+            if (response.ok && result.success) {
+                alert('클래스 신청이 완료되었습니다!');
+                console.log('신청 성공:', result.data);
+            } else {
+                const errorMessage = result.message || '알 수 없는 오류가 발생했습니다.';
+                alert('신청 실패: ' + errorMessage);
+                console.error('신청 실패:', errorMessage);
+                console.error('전체 응답:', result);
+            }
+
+        } catch (error) {
+            console.error('=== 신청 중 오류 발생 ===');
+            console.error('오류 상세:', error);
+            console.error('오류 메시지:', error.message);
+            console.error('오류 스택:', error.stack);
+            alert('신청 중 오류가 발생했습니다: ' + error.message);
+        }
+    };
 
     if (loading) {
         return (
@@ -141,10 +224,7 @@ const ClassDetail = () => {
 
                     {/* 제목 및 기본 정보 */}
                     <div className="space-y-4">
-                        <h1
-                            className="text-4xl font-extrabold"
-                            style={{ color: accentColor }}
-                        >
+                        <h1 className="text-4xl font-extrabold text-gray-800">
                             {classData.classname}
                         </h1>
                         <p className="text-lg text-gray-700">멘토: {classData.mentor_name}</p>
@@ -165,12 +245,12 @@ const ClassDetail = () => {
                         </div>
                     </div>
 
-                    {/* 탭 메뉴 */}
-                    <div className="sticky top-16 bg-white z-10">
-                        <div className="flex justify-around border-b">
+                    {/* 탭 메뉴 - 상단 고정 */}
+                    <div className="sticky top-0 bg-white z-20 border-b shadow-sm">
+                        <div className="flex justify-around">
                             <button
                                 onClick={() => scrollToSection(introRef)}
-                                className={`py-3 text-lg font-medium ${
+                                className={`py-4 text-lg font-medium ${
                                     activeSection === "intro"
                                         ? "text-indigo-600 border-b-2 border-indigo-600"
                                         : "text-gray-600 hover:text-indigo-500"
@@ -180,7 +260,7 @@ const ClassDetail = () => {
                             </button>
                             <button
                                 onClick={() => scrollToSection(curriculumRef)}
-                                className={`py-3 text-lg font-medium ${
+                                className={`py-4 text-lg font-medium ${
                                     activeSection === "curriculum"
                                         ? "text-indigo-600 border-b-2 border-indigo-600"
                                         : "text-gray-600 hover:text-indigo-500"
@@ -190,17 +270,17 @@ const ClassDetail = () => {
                             </button>
                             <button
                                 onClick={() => scrollToSection(hostRef)}
-                                className={`py-3 text-lg font-medium ${
+                                className={`py-4 text-lg font-medium ${
                                     activeSection === "host"
                                         ? "text-indigo-600 border-b-2 border-indigo-600"
                                         : "text-gray-600 hover:text-indigo-500"
                                 }`}
                             >
-                                호스트 소개
+                                멘토 소개
                             </button>
                             <button
                                 onClick={() => scrollToSection(locationRef)}
-                                className={`py-3 text-lg font-medium ${
+                                className={`py-4 text-lg font-medium ${
                                     activeSection === "location"
                                         ? "text-indigo-600 border-b-2 border-indigo-600"
                                         : "text-gray-600 hover:text-indigo-500"
@@ -214,7 +294,7 @@ const ClassDetail = () => {
                     {/* 상세 섹션들 */}
                     <div className="space-y-12">
                         {/* 클래스 소개 */}
-                        <section ref={introRef} className="space-y-4 pt-6">
+                        <section ref={introRef} className="space-y-4 pt-8">
                             <h2
                                 className="text-2xl font-semibold"
                                 style={{ color: accentColor }}
@@ -227,7 +307,7 @@ const ClassDetail = () => {
                         </section>
 
                         {/* 커리큘럼 */}
-                        <section ref={curriculumRef} className="space-y-4 pt-6">
+                        <section ref={curriculumRef} className="space-y-4 pt-8">
                             <h2
                                 className="text-2xl font-semibold"
                                 style={{ color: accentColor }}
@@ -239,21 +319,21 @@ const ClassDetail = () => {
                             </p>
                         </section>
 
-                        {/* 호스트 소개 */}
-                        <section ref={hostRef} className="space-y-4 pt-6">
+                        {/* 멘토 소개 */}
+                        <section ref={hostRef} className="space-y-4 pt-12">
                             <h2
                                 className="text-2xl font-semibold"
                                 style={{ color: accentColor }}
                             >
-                                호스트 소개
+                                멘토 소개
                             </h2>
                             <p className="text-gray-800 leading-relaxed text-lg">
-                                {classData.mentoInfo || "호스트 소개 정보가 없습니다."}
+                                {classData.mentoInfo || "멘토 소개 정보가 없습니다."}
                             </p>
                         </section>
 
                         {/* 위치 */}
-                        <section ref={locationRef} className="space-y-4 pt-6 pb-12">
+                        <section ref={locationRef} className="space-y-4 pt-12 pb-12">
                             <h2
                                 className="text-2xl font-semibold"
                                 style={{ color: accentColor }}
@@ -273,21 +353,17 @@ const ClassDetail = () => {
                 {/* 우측 칼럼: 클래스 신청 UI */}
                 <div className="space-y-6">
                     <div className="border rounded-lg shadow-sm p-4 space-y-4">
-                        <div className="flex border-b">
-                            <button
-                                className="flex-1 py-2 text-center text-white bg-gray-700 rounded-t-lg"
-                                style={{ backgroundColor: accentColor }}
-                            >
-                                1. 클래스 일정
-                            </button>
-                            <button className="flex-1 py-2 text-center text-gray-600">
-                                2. 세부 선택 사항
-                            </button>
+                        {/* 클래스 일정만 표시 */}
+                        <div className="bg-indigo-600 text-white text-center py-3 rounded-t-lg font-medium" style={{ backgroundColor: accentColor }}>
+                            1. 클래스 일정
                         </div>
+
                         <div className="pt-4 space-y-4">
                             <label className="block text-sm text-gray-700">날짜 선택</label>
                             <input
                                 type="date"
+                                value={selectedDate}
+                                onChange={(e) => setSelectedDate(e.target.value)}
                                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-300"
                             />
                             <p className="flex items-center text-sm text-green-600">
@@ -317,24 +393,37 @@ const ClassDetail = () => {
                                 <button className="flex-1 border rounded-r py-2 text-gray-700">+</button>
                             </div>
                             <p className="text-right text-xl font-bold">14,900원 /1인</p>
+
+                            {/* 찜하기 / 클래스 신청하기 버튼 */}
                             <div className="flex gap-2">
                                 <button className="flex-1 flex items-center justify-center gap-2 border rounded py-2 text-gray-700 hover:bg-gray-50">
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                    </svg>
                                     찜하기
                                 </button>
-                                <button className="flex-1 flex items-center justify-center gap-2 border rounded py-2 text-gray-700 hover:bg-gray-50">
-                                    문의하기
+                                <button
+                                    className="flex-1 bg-indigo-600 text-white rounded py-2 hover:bg-indigo-700"
+                                    style={{ backgroundColor: accentColor }}
+                                    onClick={handleApplicationClick}
+                                >
+                                    클래스 신청하기
                                 </button>
                             </div>
-                            <button
-                                className="w-full bg-indigo-600 text-white rounded py-2 hover:bg-indigo-700"
-                                style={{ backgroundColor: accentColor }}
-                            >
-                                클래스 신청하기
-                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {/* 클래스 신청 모달 */}
+            {showApplicationModal && (
+                <ClassApplication
+                    classData={classData}
+                    selectedDate={selectedDate}
+                    onClose={() => setShowApplicationModal(false)}
+                    onConfirm={handleApplicationConfirm}
+                />
+            )}
         </div>
     );
 };
