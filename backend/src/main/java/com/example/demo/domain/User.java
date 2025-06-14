@@ -34,11 +34,20 @@ public class User {
     @Enumerated(EnumType.STRING) // enum을 문자열 형태로 저장 (예: 'M', 'F')
     private Gender gender; // 성별
 
+    @Enumerated(EnumType.STRING) // enum을 문자열 형태로 저장
+    @Column(nullable = false)
+    private Role role = Role.MENTEE; // 사용자 역할 (기본값: MENTEE)
+
     private LocalDateTime createdAt = LocalDateTime.now(); // 가입 시각 (기본값: 현재 시간)
 
     // 성별을 나타내는 열거형 타입 (DB에는 'M' 또는 'F'로 저장됨)
     public enum Gender {
         M, F
+    }
+
+    // 사용자 역할을 나타내는 열거형 타입
+    public enum Role {
+        MENTEE, MENTOR, ADMIN
     }
 
     //프로필 이미지 URL을 담아두는 컬럼
@@ -96,6 +105,13 @@ public class User {
     }
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public LocalDateTime getCreatedAt() {
